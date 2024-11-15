@@ -23,7 +23,11 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       '&:after': {
         position: 'absolute',
         bottom: 0,
-        left: 0
+        left: 0,
+        width: 0,
+        height: 2,
+        content: "''",
+        backgroundColor: theme.palette.primary.main
       }
     },
 

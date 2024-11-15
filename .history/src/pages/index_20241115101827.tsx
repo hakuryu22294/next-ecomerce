@@ -3,12 +3,9 @@ import Head from 'next/head'
 import Button from '@mui/material/Button'
 import CustomTextField from 'src/components/text-field'
 import { useTheme } from '@mui/material'
-import { useSettings } from 'src/hooks/useSettings'
 
 export default function Home() {
-  const theme = useTheme()
-  const { settings } = useSettings()
-
+  const theme = useTheme
   return (
     <>
       <Head>
@@ -23,7 +20,8 @@ export default function Home() {
           width: '300px',
           margin: '40px'
         }}
-        id='outlined-multiline-flexible'
+        id='outline-multiline-flexible'
+        multiline
         defaultValue='Default Value'
       />
     </>

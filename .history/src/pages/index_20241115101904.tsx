@@ -23,7 +23,8 @@ export default function Home() {
           width: '300px',
           margin: '40px'
         }}
-        id='outlined-multiline-flexible'
+        id='outline-multiline-flexible'
+        multiline
         defaultValue='Default Value'
       />
     </>

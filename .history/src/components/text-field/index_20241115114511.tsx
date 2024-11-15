@@ -1,8 +1,6 @@
 import { TextFieldProps, TextField, styled } from '@mui/material'
 
 const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
-  //   console.log('theme', { theme })
-
   return {
     '& .MuiInputLabel-root': {
       transform: 'none',
@@ -18,13 +16,20 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       transition: theme.transitions.create(['border-color', 'box-shadow'], {
         duration: theme.transitions.duration.shorter
       }),
-      position: 'relative',
       overflow: 'hidden',
+      position: 'relative',
       '&:after': {
+        content: '""',
         position: 'absolute',
         bottom: 0,
-        left: 0
-      }
+        left: 0,
+        right: 0,
+        height: '2px', 
+        backgroundColor: theme.palette.primary.main, 
+        display: 'none'
+      },
+      '&.Mui-focused:after': {
+        display: 'block'
     },
 
     '.MuiInputBase-input': {

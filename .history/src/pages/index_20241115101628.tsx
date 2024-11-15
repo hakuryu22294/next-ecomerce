@@ -2,13 +2,8 @@
 import Head from 'next/head'
 import Button from '@mui/material/Button'
 import CustomTextField from 'src/components/text-field'
-import { useTheme } from '@mui/material'
-import { useSettings } from 'src/hooks/useSettings'
 
 export default function Home() {
-  const theme = useTheme()
-  const { settings } = useSettings()
-
   return (
     <>
       <Head>
@@ -20,10 +15,11 @@ export default function Home() {
       <Button variant='contained'>Hello world updated</Button>
       <CustomTextField
         sx={{
-          width: '300px',
-          margin: '40px'
+          width: '300px'
         }}
-        id='outlined-multiline-flexible'
+        id='outline-multiline-flexible'
+        multiline
+        rows={4}
         defaultValue='Default Value'
       />
     </>

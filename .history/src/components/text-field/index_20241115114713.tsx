@@ -20,10 +20,9 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       }),
       position: 'relative',
       overflow: 'hidden',
-      '&:after': {
+      '&:before, &:after': {
         position: 'absolute',
-        bottom: 0,
-        left: 0
+        bottom: 0
       }
     },
 

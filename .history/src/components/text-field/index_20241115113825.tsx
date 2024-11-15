@@ -17,16 +17,12 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       border: `1px solid rgba(${theme.palette.customColors.main}, 0.2)`,
       transition: theme.transitions.create(['border-color', 'box-shadow'], {
         duration: theme.transitions.duration.shorter
-      }),
-      position: 'relative',
-      overflow: 'hidden',
-      '&:after': {
-        position: 'absolute',
-        bottom: 0,
-        left: 0
-      }
+      })
+      '&:before, &:after': {
+        display: 'none'
+      },
     },
-
+   
     '.MuiInputBase-input': {
       padding: '8px 12px'
     }

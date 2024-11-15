@@ -18,12 +18,8 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       transition: theme.transitions.create(['border-color', 'box-shadow'], {
         duration: theme.transitions.duration.shorter
       }),
-      position: 'relative',
-      overflow: 'hidden',
-      '&:after': {
-        position: 'absolute',
-        bottom: 0,
-        left: 0
+      '&:before, &:after': {
+        position: 'absolute'
       }
     },
 

@@ -1,8 +1,6 @@
 import { TextFieldProps, TextField, styled } from '@mui/material'
 
 const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
-  //   console.log('theme', { theme })
-
   return {
     '& .MuiInputLabel-root': {
       transform: 'none',
@@ -18,12 +16,20 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       transition: theme.transitions.create(['border-color', 'box-shadow'], {
         duration: theme.transitions.duration.shorter
       }),
-      position: 'relative',
       overflow: 'hidden',
+      position: 'relative', // Thêm position: relative để đảm bảo &::after nằm đúng vị trí
       '&:after': {
+        content: '""',
         position: 'absolute',
         bottom: 0,
-        left: 0
+        left: 0,
+        right: 0,
+        height: '2px', // Độ dày của dòng underline khi focus
+        backgroundColor: theme.palette.primary.main, // Màu sắc underline khi focus
+        display: 'none' // Ẩn ở trạng thái bình thường
+      },
+      '&.Mui-focused:after': {
+        display: 'block' // Hiện khi có trạng thái focus
       }
     },
 

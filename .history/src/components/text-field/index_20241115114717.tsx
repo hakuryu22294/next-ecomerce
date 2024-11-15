@@ -22,8 +22,7 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       overflow: 'hidden',
       '&:after': {
         position: 'absolute',
-        bottom: 0,
-        left: 0
+        bottom: 0
       }
     },
 

@@ -1,7 +1,7 @@
 import { TextFieldProps, TextField, styled } from '@mui/material'
 
 const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
-  //   console.log('theme', { theme })
+  console.log('theme', { theme })
 
   return {
     '& .MuiInputLabel-root': {
@@ -11,32 +11,21 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => {
       marginBottom: theme.spacing(1),
       fontSize: theme.typography.body2.fontSize
     },
-    '& .MuiInputBase-root': {
+    '& .MuiBaseInput-root': {
       borderRadius: 8,
       backgroundColor: 'transparent !important',
       border: `1px solid rgba(${theme.palette.customColors.main}, 0.2)`,
       transition: theme.transitions.create(['border-color', 'box-shadow'], {
         duration: theme.transitions.duration.shorter
-      }),
-      position: 'relative',
-      overflow: 'hidden',
-      '&:after': {
-        position: 'absolute',
-        bottom: 0,
-        left: 0
-      }
-    },
-
-    '.MuiInputBase-input': {
-      padding: '8px 12px'
+      })
     }
   }
 })
 
 const CustomTextField = (props: TextFieldProps) => {
-  const { size = 'small', variant = 'filled', InputLabelProps, ...rests } = props
+  const { size = 'small', InputLabelProps, ...rests } = props
 
-  return <TextFieldStyled size={size} variant={variant} InputLabelProps={{ ...InputLabelProps }} {...rests} />
+  return <TextField size={size} variant='filled' InputLabelProps={{ ...InputLabelProps, shrink: true }} {...rests} />
 }
 
 export default CustomTextField
