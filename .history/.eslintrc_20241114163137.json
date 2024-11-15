@@ -56,8 +56,7 @@
     {
       "files": ["src/iconify-bundle/*"],
       "rules": {
-        "@typescript-eslint/no-var-requires": "off",
-         "no-unused-vars": "off"
+        "@typescript-eslint/no-var-requires": "off"
       }
     }
   ]
