@@ -1,14 +1,10 @@
+/* eslint-disable no-unused-vars */
 'use client'
 import Head from 'next/head'
 import Button from '@mui/material/Button'
 import CustomTextField from 'src/components/text-field'
-import { useTheme } from '@mui/material'
-import { useSettings } from 'src/hooks/useSettings'
 
 export default function Home() {
-  const theme = useTheme()
-  const { settings } = useSettings()
-
   return (
     <>
       <Head>
