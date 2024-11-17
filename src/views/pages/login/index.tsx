@@ -4,7 +4,6 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Grid,
   IconButton,
   InputAdornment,
   Link,
@@ -29,8 +28,6 @@ import IconifyIcon from 'src/components/Icon'
 
 //IMAGE
 import loginDark from 'public/images/login-dark.png'
-import FacebookLogo from 'public/svgs/facebook.svg'
-import GoogleLogo from 'public/svgs/google.svg'
 
 // import loginLight from 'public/images/login-light.png'
 
