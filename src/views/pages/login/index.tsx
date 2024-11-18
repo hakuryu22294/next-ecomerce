@@ -4,10 +4,8 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Grid,
   IconButton,
   InputAdornment,
-  Link,
   Typography,
   useTheme
 } from '@mui/material'
@@ -15,6 +13,7 @@ import {
 //NEXT
 import { NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 
 //COMPONENT
 import CustomTextField from 'src/components/text-field'
@@ -28,6 +27,8 @@ import { useState } from 'react'
 import IconifyIcon from 'src/components/Icon'
 
 //IMAGE
+import loginDark from 'public/images/login-dark.png'
+
 // import loginLight from 'public/images/login-light.png'
 
 type TProps = {}
@@ -108,7 +109,7 @@ const LoginPage: NextPage<TProps> = () => {
           Sign in
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-          <Box>
+          <Box sx={{ width: '300px' }}>
             <Controller
               rules={{
                 required: true
@@ -131,7 +132,7 @@ const LoginPage: NextPage<TProps> = () => {
               name='email'
             />
           </Box>
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 2, width: '300px' }}>
             <Controller
               rules={{
                 maxLength: 100
@@ -175,18 +176,14 @@ const LoginPage: NextPage<TProps> = () => {
             }
             label='Remember me'
           />
-          <Link href='#' variant='body2'>
-            Forgot password?
-          </Link>
+          <Link href='#'>Forgot password?</Link>
           <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
             <Typography>{"Don't have an account? "}</Typography>
 
-            <Link href='#' variant='body2'>
-              {'Sign Up'}
-            </Link>
+            <Link href='/register'>{'Register'}</Link>
           </Box>
           <Typography sx={{ textAlign: 'center', my: 2 }}>Or</Typography>
           <Box>
@@ -195,7 +192,7 @@ const LoginPage: NextPage<TProps> = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 aria-hidden='true'
                 role='img'
-                font-size='1.375rem'
+                fontSize='1.375rem'
                 className='iconify iconify--mdi'
                 width='1.5em'
                 height='1.5em'
@@ -212,7 +209,7 @@ const LoginPage: NextPage<TProps> = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 aria-hidden='true'
                 role='img'
-                font-size='1.375rem'
+                fontSize='1.375rem'
                 className='iconify iconify--mdi'
                 width='1.5em'
                 height='1.5em'
