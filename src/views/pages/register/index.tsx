@@ -4,7 +4,6 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Grid,
   IconButton,
   InputAdornment,
   Link,
@@ -28,11 +27,13 @@ import { useState } from 'react'
 import IconifyIcon from 'src/components/Icon'
 
 //IMAGE
+import registerDark from 'public/images/register-dark.png'
+
 // import loginLight from 'public/images/login-light.png'
 
 type TProps = {}
 
-const LoginPage: NextPage<TProps> = () => {
+const RegisterPage: NextPage<TProps> = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [isRemember, setIsRemember] = useState<boolean>(false)
 
@@ -87,7 +88,7 @@ const LoginPage: NextPage<TProps> = () => {
         }}
       >
         <Image
-          src={loginDark}
+          src={registerDark}
           alt='login-dark'
           style={{
             width: 'auto',
@@ -195,7 +196,7 @@ const LoginPage: NextPage<TProps> = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 aria-hidden='true'
                 role='img'
-                font-size='1.375rem'
+                fontSize='1.375rem'
                 className='iconify iconify--mdi'
                 width='1.5em'
                 height='1.5em'
@@ -212,7 +213,7 @@ const LoginPage: NextPage<TProps> = () => {
                 xmlns='http://www.w3.org/2000/svg'
                 aria-hidden='true'
                 role='img'
-                font-size='1.375rem'
+                fontSize='1.375rem'
                 className='iconify iconify--mdi'
                 width='1.5em'
                 height='1.5em'
@@ -231,4 +232,4 @@ const LoginPage: NextPage<TProps> = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
