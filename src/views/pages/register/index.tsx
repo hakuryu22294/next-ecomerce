@@ -27,14 +27,16 @@ import { useState } from 'react'
 import IconifyIcon from 'src/components/Icon'
 
 //IMAGE
-import loginDark from 'public/images/login-dark.png'
+import registerDark from 'public/images/register-dark.png'
 
 // import loginLight from 'public/images/login-light.png'
 
 type TProps = {}
 
-const LoginPage: NextPage<TProps> = () => {
+const RegisterPage: NextPage<TProps> = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false)
+
   const [isRemember, setIsRemember] = useState<boolean>(false)
 
   const theme = useTheme()
@@ -47,7 +49,15 @@ const LoginPage: NextPage<TProps> = () => {
       .matches(
         PASSWORD_REG,
         'Password includes at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character'
+      ),
+    confirmPassword: yup
+      .string()
+      .required('Confirm password is required')
+      .matches(
+        PASSWORD_REG,
+        'Confirm password includes at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character'
       )
+      .oneOf([yup.ref('password'), ''], 'Password does not match')
   })
   const {
     handleSubmit,
@@ -56,9 +66,10 @@ const LoginPage: NextPage<TProps> = () => {
   } = useForm({
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     },
-    mode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(schema)
   })
 
@@ -87,14 +98,7 @@ const LoginPage: NextPage<TProps> = () => {
           minWidth: '50vw'
         }}
       >
-        <Image
-          src={loginDark}
-          alt='login-dark'
-          style={{
-            width: 'auto',
-            height: 'auto'
-          }}
-        />
+        <Image src={registerDark} alt='login-dark' priority />
       </Box>
       <Box
         sx={{
@@ -106,10 +110,10 @@ const LoginPage: NextPage<TProps> = () => {
         }}
       >
         <Typography component='h1' variant='h5'>
-          Sign in
+          Register
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-          <Box sx={{ width: '300px' }}>
+          <Box>
             <Controller
               rules={{
                 required: true
@@ -132,7 +136,7 @@ const LoginPage: NextPage<TProps> = () => {
               name='email'
             />
           </Box>
-          <Box sx={{ mt: 2, width: '300px' }}>
+          <Box sx={{ mt: 2 }}>
             <Controller
               rules={{
                 maxLength: 100
@@ -164,6 +168,42 @@ const LoginPage: NextPage<TProps> = () => {
               name='password'
             />
           </Box>
+          <Box sx={{ mt: 2 }}>
+            <Controller
+              rules={{
+                maxLength: 100
+              }}
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <CustomTextField
+                  required
+                  fullWidth
+                  label='Confirm Password'
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  placeholder='Enter confirm password'
+                  error={Boolean(errors.password)}
+                  helperText={errors.confirmPassword?.message}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton edge='end' onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                          {showConfirmPassword ? (
+                            <IconifyIcon icon='eva:eye-fill' />
+                          ) : (
+                            <IconifyIcon icon='eva:eye-off-fill' />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              )}
+              name='confirmPassword'
+            />
+          </Box>
 
           <FormControlLabel
             control={
@@ -181,9 +221,9 @@ const LoginPage: NextPage<TProps> = () => {
             Sign In
           </Button>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-            <Typography>{"Don't have an account? "}</Typography>
+            <Typography>{'You have an account? '}</Typography>
 
-            <Link href='/register'>{'Register'}</Link>
+            <Link href='/login'>{'Login'}</Link>
           </Box>
           <Typography sx={{ textAlign: 'center', my: 2 }}>Or</Typography>
           <Box>
@@ -228,4 +268,4 @@ const LoginPage: NextPage<TProps> = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
