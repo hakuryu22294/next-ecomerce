@@ -29,14 +29,20 @@ import IconifyIcon from 'src/components/Icon'
 //IMAGE
 import loginDark from 'public/images/login-dark.png'
 
+//** Auth Hook */
+import { useAuth } from 'src/hooks/useAuth'
+
 // import loginLight from 'public/images/login-light.png'
 
 type TProps = {}
 
 const LoginPage: NextPage<TProps> = () => {
+  // ** State
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [isRemember, setIsRemember] = useState<boolean>(false)
 
+  // ** Auth Hook
+  const { login } = useAuth()
   const theme = useTheme()
 
   const schema = yup.object().shape({
@@ -63,7 +69,9 @@ const LoginPage: NextPage<TProps> = () => {
   })
 
   const onSubmit = (data: { email: string; password: string }) => {
-    console.log(data)
+    if (!Object.keys(errors).length) {
+      login({ ...data, rememberMe: isRemember })
+    }
   }
 
   return (
