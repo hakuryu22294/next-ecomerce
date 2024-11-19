@@ -15,7 +15,7 @@ type TProps = {
   children: React.ReactNode
 }
 
-const BlankLayoutWrapper = styled(Box)<BoxProps>(({ theme }) => ({
+const BlankLayoutWrapper = styled(Box)<BoxProps>(({}) => ({
   heigth: '100vh'
 }))
 
