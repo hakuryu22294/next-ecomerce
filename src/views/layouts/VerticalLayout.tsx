@@ -14,6 +14,7 @@ import { mainListItems, secondaryListItems } from '@views/layouts/components/lis
 
 // ** Next
 import { NextPage } from 'next'
+import IconifyIcon from 'src/components/Icon'
 
 const drawerWidth: number = 240
 
@@ -58,7 +59,9 @@ const VerticalLayout: NextPage<HorizontalProps> = ({ open, toggleDrawer }) => {
           px: [1]
         }}
       >
-        <IconButton onClick={toggleDrawer}></IconButton>
+        <IconButton onClick={toggleDrawer}>
+          <IconifyIcon icon='ic:round-menu' />
+        </IconButton>
       </Toolbar>
       <Divider />
       <List component='nav'>

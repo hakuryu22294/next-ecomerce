@@ -9,6 +9,7 @@ import Badge from '@mui/material/Badge'
 // ** Next
 import { NextPage } from 'next'
 import * as React from 'react'
+import IconifyIcon from 'src/components/Icon'
 
 const drawerWidth: number = 240
 
@@ -40,7 +41,7 @@ const AppBar = styled(MuiAppBar, {
   })
 }))
 
-const VerticalLayout: NextPage<TProps> = ({ open, toggleDrawer }) => {
+const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer }) => {
   return (
     <AppBar position='absolute' open={open}>
       <Toolbar
@@ -57,16 +58,20 @@ const VerticalLayout: NextPage<TProps> = ({ open, toggleDrawer }) => {
             marginRight: '36px',
             ...(open && { display: 'none' })
           }}
-        ></IconButton>
+        >
+          <IconifyIcon icon='ic:round-menu' />
+        </IconButton>
         <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
           Dashboard
         </Typography>
         <IconButton color='inherit'>
-          <Badge badgeContent={4} color='secondary'></Badge>
+          <Badge badgeContent={4} color='secondary'>
+            <IconifyIcon icon='ic:round-notifications' />
+          </Badge>
         </IconButton>
       </Toolbar>
     </AppBar>
   )
 }
 
-export default VerticalLayout
+export default HorizontalLayout
