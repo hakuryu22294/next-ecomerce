@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 'use client'
 import Head from 'next/head'
-import Button from '@mui/material/Button'
-import CustomTextField from 'src/components/text-field'
 
 export default function Home() {
   return (
@@ -13,15 +11,6 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Button variant='contained'>Hello world updated</Button>
-      <CustomTextField
-        sx={{
-          width: '300px',
-          margin: '40px'
-        }}
-        id='outlined-multiline-flexible'
-        defaultValue='Default Value'
-      />
     </>
   )
 }
