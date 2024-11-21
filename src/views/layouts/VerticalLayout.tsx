@@ -5,21 +5,20 @@ import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import MuiDrawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
-import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 
 // ** Components
-import { mainListItems, secondaryListItems } from '@views/layouts/components/listitem'
+import IconifyIcon from 'src/components/Icon'
 
 // ** Next
 import { NextPage } from 'next'
-import IconifyIcon from 'src/components/Icon'
+import ListVerticalLayout from './components/ListVerticalLayout'
 
 const drawerWidth: number = 240
 
 // ** Children Props
-type HorizontalProps = {
+type VerticalProps = {
   toggleDrawer: () => void
   open: boolean
 }
@@ -48,7 +47,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })
   }
 }))
 
-const VerticalLayout: NextPage<HorizontalProps> = ({ open, toggleDrawer }) => {
+const VerticalLayout: NextPage<VerticalProps> = ({ open, toggleDrawer }) => {
   return (
     <Drawer variant='permanent' open={open}>
       <Toolbar
@@ -60,15 +59,11 @@ const VerticalLayout: NextPage<HorizontalProps> = ({ open, toggleDrawer }) => {
         }}
       >
         <IconButton onClick={toggleDrawer}>
-          <IconifyIcon icon='ic:round-menu' />
+          <IconifyIcon icon='ic:arrow-left' />
         </IconButton>
       </Toolbar>
       <Divider />
-      <List component='nav'>
-        {mainListItems}
-        <Divider sx={{ my: 1 }} />
-        {secondaryListItems}
-      </List>
+      <ListVerticalLayout />
     </Drawer>
   )
 }
