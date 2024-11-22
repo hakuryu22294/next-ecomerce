@@ -19,17 +19,13 @@ type ChildrenProps = {
   children: React.ReactNode
 }
 
-const UserLayout: NextPage<ChildrenProps> = ({ children }) => {
-  const [open, setOpen] = React.useState(true)
-  const toggleDrawer = () => {
-    setOpen(!open)
-  }
+const LayoutNotApp: NextPage<ChildrenProps> = ({ children }) => {
+  const [open, setOpen] = React.useState()
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <VerticalLayout open={open} toggleDrawer={toggleDrawer} />
-      <HorizontalLayout open={open} toggleDrawer={toggleDrawer} />
+      <HorizontalLayout open={false} toggleDrawer={() => {}} isHideMenu={true} />
       <Box
         component='main'
         sx={{
@@ -49,4 +45,4 @@ const UserLayout: NextPage<ChildrenProps> = ({ children }) => {
   )
 }
 
-export default UserLayout
+export default LayoutNotApp
