@@ -12,7 +12,7 @@ import authConfig from 'src/configs/auth'
 
 // ** Types
 import { AuthValuesType, LoginParams, ErrCallbackType, UserDataType } from './types'
-import { loginAuth } from 'src/services/auth'
+import { loginAuth, logoutAuth } from 'src/services/auth'
 import axios from 'axios'
 import { CONFIG_API } from 'src/configs/api'
 import { clearUserData, setLocalUserData } from 'src/helpers/storage'
@@ -90,8 +90,11 @@ const AuthProvider = ({ children }: Props) => {
   }
 
   const handleLogout = () => {
-    setUser(null)
-    clearUserData()
+    logoutAuth().then(response => {
+      setUser(null)
+      clearUserData()
+    })
+
     router.push('/login')
   }
 
