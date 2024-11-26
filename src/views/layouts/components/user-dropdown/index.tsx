@@ -5,7 +5,7 @@ import Image from 'next/image'
 // ** MUI
 import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material'
 import { useAuth } from 'src/hooks/useAuth'
-import IconifyIcon from '../Icon'
+import IconifyIcon from '../../../../components/Icon'
 
 type TProps = {}
 const UserDropDown = (props: TProps) => {

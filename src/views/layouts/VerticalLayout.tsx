@@ -13,7 +13,7 @@ import IconifyIcon from 'src/components/Icon'
 
 // ** Next
 import { NextPage } from 'next'
-import ListVerticalLayout from './components/ListVerticalLayout'
+import ListVerticalLayout from '@views/layouts/ListVerticalLayout'
 
 const drawerWidth: number = 240
 
