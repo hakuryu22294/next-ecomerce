@@ -10,8 +10,11 @@ import Badge from '@mui/material/Badge'
 import { NextPage } from 'next'
 import * as React from 'react'
 import IconifyIcon from 'src/components/Icon'
+
+// ** Components
 import UserDropDown from 'src/views/layouts/components/user-dropdown'
 import ModeToggle from './components/mode-toggle'
+import LanguageDropdown from './components/language-dropdown'
 
 const drawerWidth: number = 240
 
@@ -73,6 +76,7 @@ const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) 
         <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
           Dashboard
         </Typography>
+        <LanguageDropdown />
         <ModeToggle />
         <UserDropDown />
       </Toolbar>

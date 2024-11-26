@@ -28,3 +28,14 @@ i18n
   })
 
 export default i18n
+
+export const LANGUAGE_OPTION = [
+  {
+    language: 'English',
+    value: 'en'
+  },
+  {
+    language: 'Tiếng Việt',
+    value: 'vi'
+  }
+]
