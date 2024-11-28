@@ -13,10 +13,10 @@ import authConfig from 'src/configs/auth'
 // ** Types
 import { AuthValuesType, LoginParams, ErrCallbackType, UserDataType } from './types'
 import { loginAuth, logoutAuth } from 'src/services/auth'
-import axios from 'axios'
 import { CONFIG_API } from 'src/configs/api'
 import { clearUserData, setLocalUserData } from 'src/helpers/storage'
 import instanceAxios from 'src/helpers/axios'
+import { error } from 'console'
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -70,29 +70,32 @@ const AuthProvider = ({ children }: Props) => {
   }, [])
 
   const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
+    setLoading(true)
     loginAuth({ email: params.email, password: params.password })
       .then(async response => {
         const { access_token, refresh_token, user } = response.data
-        console.log('response', response)
-        params.rememberMe ? setLocalUserData(JSON.stringify(user), access_token, refresh_token) : null
+        if (access_token && refresh_token && user) {
+          params.rememberMe ? setLocalUserData(JSON.stringify(user), access_token, refresh_token) : null
+        }
         const returnUrl = router.query.returnUrl
-        setUser({ ...response.data.data })
+        setUser(user)
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+        setLoading(false)
         router.replace(redirectURL as string)
       })
 
       .catch(err => {
+        setLoading(false)
         if (errorCallback) errorCallback(err)
       })
   }
 
   const handleLogout = () => {
-    logoutAuth().then(response => {
+    logoutAuth().then(() => {
       setUser(null)
       clearUserData()
+      router.push('/login')
     })
-
-    router.push('/login')
   }
 
   const values = {
