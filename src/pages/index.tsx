@@ -3,6 +3,7 @@
 import Head from 'next/head'
 import { ReactNode } from 'react'
 import LayoutNotApp from 'src/views/layouts/LayoutNotApp'
+import UserLayout from 'src/views/layouts/UserLayout'
 
 export default function Home() {
   return (
@@ -18,3 +19,5 @@ export default function Home() {
 }
 
 Home.getLayout = (page: ReactNode) => <LayoutNotApp>{page}</LayoutNotApp>
+Home.guestGuard = false
+Home.authGuard = false
