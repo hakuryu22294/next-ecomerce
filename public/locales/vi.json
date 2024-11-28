@@ -1,8 +1,6 @@
 {
     "Account": "Tài khoản",
-    "Logout": "Đăng xuất",
-    "Login": "Đăng nhập",
-    "Register": "Đăng ký",
-    "Email": "Email",
-    "Password": "Mật khẩu"
+    "my_profile": "Trang cá nhân",
+    "sign_in": "Đăng nhập",
+    "Logout": "Đăng xuất"
 }

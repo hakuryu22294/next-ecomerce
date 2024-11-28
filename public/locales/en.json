@@ -1,8 +1,6 @@
 {
     "Account": "Account",
-    "Logout": "Logout",
-    "Login": "Login",
-    "Register": "Register",
-    "Email": "Email",
-    "Password": "Password"
+    "my_profile": "My Profile",
+    "sign_in": "Sign In",
+    "Logout": "Logout"
 }

@@ -15,6 +15,9 @@ import IconifyIcon from 'src/components/Icon'
 import UserDropDown from 'src/views/layouts/components/user-dropdown'
 import ModeToggle from './components/mode-toggle'
 import LanguageDropdown from './components/language-dropdown'
+import { useAuth } from 'src/hooks/useAuth'
+import { Button } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 const drawerWidth: number = 240
 
@@ -51,6 +54,10 @@ const AppBar = styled(MuiAppBar, {
 }))
 
 const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) => {
+  const { user } = useAuth()
+
+  const { t } = useTranslation()
+
   return (
     <AppBar position='absolute' open={open}>
       <Toolbar
@@ -78,7 +85,13 @@ const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) 
         </Typography>
         <LanguageDropdown />
         <ModeToggle />
-        <UserDropDown />
+        {user ? (
+          <UserDropDown />
+        ) : (
+          <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>
+            Sign In
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   )

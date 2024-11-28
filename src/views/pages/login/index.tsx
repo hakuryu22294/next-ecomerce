@@ -96,6 +96,7 @@ const LoginPage: NextPage<TProps> = () => {
         }}
       >
         <Image
+          fetchPriority='low'
           src={loginDark}
           alt='login-dark'
           style={{
