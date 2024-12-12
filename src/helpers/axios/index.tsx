@@ -32,7 +32,7 @@ const instanceAxios = axios.create({
  * This function should manage the navigation to the appropriate page
  * based on the user's authentication status or any other relevant condition.
  */
-const hanldeRedirectLogin = (router: NextRouter, setUser: (data: UserDataType | null) => void) => {
+const handleRedirect = (router: NextRouter, setUser: (data: UserDataType | null) => void) => {
   if (router.asPath !== '/') {
     router.replace({
       pathname: '/login',
@@ -70,28 +70,26 @@ const AxiosInterceptor: FC<TAxiosInterceptor> = ({ children }) => {
                 if (newAccessToken) {
                   config.headers['Authorization'] = `Bearer ${newAccessToken}`
                 } else {
-                  hanldeRedirectLogin(router, setUser)
+                  handleRedirect(router, setUser)
                 }
               })
               .catch(err => {
-                hanldeRedirectLogin(router, setUser)
+                handleRedirect(router, setUser)
               })
           } else {
           }
         } else {
-          hanldeRedirectLogin(router, setUser)
+          handleRedirect(router, setUser)
         }
       }
     } else {
-      hanldeRedirectLogin(router, setUser)
+      handleRedirect(router, setUser)
     }
 
     return config
   })
 
   instanceAxios.interceptors.response.use(response => {
-    console.log('response::', response)
-
     return response
   })
 
