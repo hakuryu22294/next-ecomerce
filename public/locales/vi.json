@@ -2,5 +2,18 @@
     "Account": "Tài khoản",
     "my_profile": "Trang cá nhân",
     "sign_in": "Đăng nhập",
-    "Logout": "Đăng xuất"
+    "Logout": "Đăng xuất",
+    "enter_your_email": "Nhập email của bạn",
+    "enter_your_role": "Nhập vai trò của bạn",
+    "Role": "Nhóm vai trò",
+    "enter_your_address": "Nhập địa chỉ của bạn",
+    "Address": "Địa chỉ",
+    "Full_name": "Họ và tên",
+    "enter_your_full_name": "Nhập họ và tên của bạn",
+    "Phone_number": "Số điện thoại",
+    "enter_your_phone_number": "Nhập vào số điện thoại của bạn",
+    "City": "Thành phố",
+    "enter_your_city": "Chọn thành phố của bạn",
+    "Upload_avatar": "Tải ảnh đại diện",
+    "Change_avatar": "Thay đổi ảnh đại diện"
 }

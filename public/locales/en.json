@@ -2,5 +2,18 @@
     "Account": "Account",
     "my_profile": "My Profile",
     "sign_in": "Sign In",
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "enter_your_email": "Enter your email",
+    "enter_your_role": "Enter your role",
+    "Role": "Role",
+    "enter_your_address": "Enter your address",
+    "Address": "Address",
+    "Full_name": "Full name",
+    "enter_your_full_name": "Enter your full name",
+    "Phone_number": "Phone number",
+    "enter_your_phone_number": "Input your phone number",
+    "City": "City",
+    "enter_your_city": "Enter your city",
+    "Upload_avatar": "Upload avatar",
+    "Change_avatar": "Change avatar"
 }
