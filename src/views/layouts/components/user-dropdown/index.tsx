@@ -6,12 +6,22 @@ import Image from 'next/image'
 import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material'
 import { useAuth } from 'src/hooks/useAuth'
 import IconifyIcon from '../../../../components/Icon'
+import { useTranslation } from 'react-i18next'
+import { useRouter } from 'next/router'
+import { ROUTE_CONFIG } from 'src/configs/route'
 
 type TProps = {}
 const UserDropDown = (props: TProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
+  // ** Router
+  const router = useRouter()
+
+  // ** Auth Hook,
   const { user, logout } = useAuth()
+
+  // ** Translation Hook
+  const { t } = useTranslation()
 
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -19,6 +29,11 @@ const UserDropDown = (props: TProps) => {
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleNavigateMyProfile = () => {
+    handleClose()
+    router.push(`${ROUTE_CONFIG.MY_PROFILE}`)
   }
 
   const handleLogout = () => {
@@ -86,24 +101,12 @@ const UserDropDown = (props: TProps) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>{user?.email}</MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon></ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon></ListItemIcon>
-          Settings
+        <MenuItem onClick={handleNavigateMyProfile}>
+          <Avatar /> {t('my_profile')}
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon></ListItemIcon>
-          Logout
+          {t('Logout')}
         </MenuItem>
       </Menu>
     </React.Fragment>

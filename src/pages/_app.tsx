@@ -64,10 +64,14 @@ if (themeConfig.routingLoader) {
 
 const Guard = ({ children, authGuard, guestGuard }: GuardProps) => {
   if (guestGuard) {
+    console.log('guestGuard')
+
     return <GuestGuard fallback={<FallbackSpinner />}>{children}</GuestGuard>
   } else if (!guestGuard && !authGuard) {
     return <>{children}</>
   } else {
+    console.log('authGuard')
+
     return <AuthGuard fallback={<FallbackSpinner />}>{children}</AuthGuard>
   }
 }
