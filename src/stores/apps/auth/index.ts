@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 //** Auth Actions */
-import { registerAuthAction } from './action'
+import { registerAuthAction, updateAuthMeAction } from './action'
 
 interface DataParams {
   q: string
@@ -38,6 +38,7 @@ export const authSlice = createSlice({
     }
   },
   extraReducers: builder => {
+    //** Register */
     builder
       .addCase(registerAuthAction.fulfilled, (state, action) => {
         state.isLoading = false
@@ -46,14 +47,34 @@ export const authSlice = createSlice({
         state.message = action.payload?.message
         state.typeError = action.payload?.typeError
       })
-      .addCase(registerAuthAction.rejected, (state, action) => {
+      .addCase(registerAuthAction.rejected, state => {
         state.isLoading = false
         state.isSuccess = false
         state.isError = true
         state.message = ''
         state.typeError = ''
       })
-      .addCase(registerAuthAction.pending, (state, action) => {
+      .addCase(registerAuthAction.pending, state => {
+        state.isLoading = true
+      })
+
+    //**Update Me */
+    builder
+      .addCase(updateAuthMeAction.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = !!action.payload?.data?.email
+        state.isError = !action.payload?.data?.email
+        state.message = action.payload?.message
+        state.typeError = action.payload?.typeError
+      })
+      .addCase(updateAuthMeAction.rejected, state => {
+        state.isLoading = false
+        state.isSuccess = false
+        state.isError = true
+        state.message = ''
+        state.typeError = ''
+      })
+      .addCase(updateAuthMeAction.pending, state => {
         state.isLoading = true
       })
   }
