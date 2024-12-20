@@ -1,13 +1,13 @@
 //MUI
-import { Avatar, Box, Button, Grid, useTheme } from '@mui/material'
+import { Avatar, Box, Button, Grid, Icon, IconButton, useTheme } from '@mui/material'
 
 //NEXT
 import { NextPage } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
 
 //COMPONENT
 import CustomTextField from 'src/components/text-field'
+import IconifyIcon from 'src/components/Icon'
+import WrapperFileUpload from 'src/components/wrapper-file-upload'
 
 //FORM
 import { Controller, useForm } from 'react-hook-form'
@@ -18,8 +18,9 @@ import { useEffect, useState } from 'react'
 
 //IMAGE
 import { useTranslation } from 'react-i18next'
-import WrapperFileUpload from 'src/components/wrapper-file-upload'
 import { useAuth } from 'src/hooks/useAuth'
+import { getAuthMe } from 'src/services/auth'
+import { convertBase64, toFullName } from 'src/utils'
 
 // import loginLight from 'public/images/login-light.png'
 
@@ -35,18 +36,26 @@ type TDefautlValues = {
 }
 
 const MyProfilePage: NextPage<TProps> = () => {
+  //**context
   const { user } = useAuth()
-  const { t } = useTranslation()
 
+  //** State */
+  const [loading, setLoading] = useState(true)
+  const [avatar, setAvatar] = useState(user?.avatar || '')
+
+  //** i18n */
+  const { t, i18n } = useTranslation()
+
+  //** Theme */
   const theme = useTheme()
 
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').matches(EMAIL_REG, 'Invalid email'),
     fullName: yup.string().required('Full name is required'),
-    address: yup.string().required('Address is required'),
+    address: yup.string().notRequired(),
     phoneNumber: yup.string().required('Phone number is required'),
     role: yup.string().required('Role is required'),
-    city: yup.string()
+    city: yup.string().notRequired()
   })
 
   const defaultValues: TDefautlValues = {
@@ -73,22 +82,39 @@ const MyProfilePage: NextPage<TProps> = () => {
     console.log(data)
   }
 
-  const handleUploadAvatar = (file: File) => {
-    console.log(file)
+  const fetchGetAuthMe = async () => {
+    await getAuthMe()
+      .then(async res => {
+        setLoading(false)
+        const data = res.data
+        console.log(data)
+        if (data) {
+          reset({
+            email: data.email,
+            city: data.city,
+            address: data.address,
+            phoneNumber: data.phoneNumber,
+            role: data?.role?.name,
+            fullName: toFullName(data.firstName, data.middleName, data.lastName, i18n.language as 'vi' | 'en')
+          })
+        }
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  }
+
+  const handleUploadAvatar = async (file: File) => {
+    const base64 = await convertBase64(file)
+    setAvatar(base64 as string)
+  }
+
+  const cancelAvatarUpload = () => {
+    setAvatar('')
   }
 
   useEffect(() => {
-    if (user) {
-      console.log(user)
-      reset({
-        email: user.email,
-        city: user.city,
-        address: user.address,
-        phoneNumber: user.phoneNumber,
-        role: user.role.name,
-        fullName: user.fullName
-      })
-    }
+    fetchGetAuthMe()
   }, [])
 
   return (
@@ -115,7 +141,32 @@ const MyProfilePage: NextPage<TProps> = () => {
                     gap: 2
                   }}
                 >
-                  <Avatar sx={{ width: 100, height: 100 }}></Avatar>
+                  <Box sx={{ position: 'relative' }}>
+                    <IconButton
+                      sx={{
+                        position: 'absolute',
+                        bottom: 0,
+                        right: -6,
+                        zIndex: 2,
+                        backgroundColor: theme.palette.background.default
+                      }}
+                      onClick={cancelAvatarUpload}
+                      edge='start'
+                      color='inherit'
+                      aria-label='open drawer'
+                    >
+                      <IconifyIcon icon='material-symbols:close' />
+                    </IconButton>
+                    {avatar ? (
+                      <Avatar alt='avatar' src={avatar} sx={{ width: 100, height: 100 }}>
+                        <IconifyIcon icon='ph:user-thin' />
+                      </Avatar>
+                    ) : (
+                      <Avatar alt='avatar' sx={{ width: 100, height: 100 }}>
+                        <IconifyIcon icon='ph:user-thin' />
+                      </Avatar>
+                    )}
+                  </Box>
                   <WrapperFileUpload uploadFunc={handleUploadAvatar}>
                     <Button variant='outlined' sx={{ width: 'auto', display: 'flex', alignItems: 'center', gap: 2 }}>
                       {t('Change_avatar')}
@@ -209,7 +260,6 @@ const MyProfilePage: NextPage<TProps> = () => {
                   control={control}
                   render={({ field: { onChange, onBlur, value } }) => (
                     <CustomTextField
-                      required
                       fullWidth
                       label={t('Address')}
                       onChange={onChange}
