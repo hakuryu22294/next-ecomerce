@@ -1,6 +1,6 @@
 // ** Redux Imports
 import { Dispatch } from 'redux'
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 //** Auth Actions */
 import { registerAuthAction, updateAuthMeAction } from './action'
@@ -20,7 +20,10 @@ interface Redux {
 const initialState = {
   isLoading: false,
   isSuccess: false,
+  isSuccessUpdateMe: false,
   isError: false,
+  isErrorUpdateMe: false,
+  messageUpdateMe: '',
   message: '',
   typeError: ''
 }
@@ -33,6 +36,9 @@ export const authSlice = createSlice({
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
+      state.isErrorUpdateMe = false
+      state.isSuccessUpdateMe = false
+      state.messageUpdateMe = ''
       state.message = ''
       state.typeError = ''
     }
@@ -62,16 +68,16 @@ export const authSlice = createSlice({
     builder
       .addCase(updateAuthMeAction.fulfilled, (state, action) => {
         state.isLoading = false
-        state.isSuccess = !!action.payload?.data?.email
-        state.isError = !action.payload?.data?.email
-        state.message = action.payload?.message
+        state.isSuccessUpdateMe = !!action.payload?.data?.email
+        state.isErrorUpdateMe = !action.payload?.data?.email
+        state.messageUpdateMe = action.payload?.message
         state.typeError = action.payload?.typeError
       })
       .addCase(updateAuthMeAction.rejected, state => {
         state.isLoading = false
-        state.isSuccess = false
-        state.isError = true
-        state.message = ''
+        state.isSuccessUpdateMe = false
+        state.isErrorUpdateMe = true
+        state.messageUpdateMe = ''
         state.typeError = ''
       })
       .addCase(updateAuthMeAction.pending, state => {
