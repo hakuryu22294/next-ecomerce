@@ -37,6 +37,7 @@ const AuthGuard = (props: AuthGuardProps) => {
     }
   }, [router.route])
   if (authContext.loading || authContext.user === null) return fallback
+  console.log(authContext.user)
 
   return <>{children}</>
 }
