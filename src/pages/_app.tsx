@@ -96,13 +96,15 @@ export default function App(props: ExtendedAppProps) {
     success: {
       className: 'react-hot-toast',
       style: {
-        background: '#DDF6E8'
+        background: '#DDF6E8',
+        color: '#000'
       }
     },
     error: {
       className: 'react-hot-toast',
       style: {
-        background: '#FDE4D5'
+        background: '#FDE4D5',
+        color: '#000'
       }
     }
   }

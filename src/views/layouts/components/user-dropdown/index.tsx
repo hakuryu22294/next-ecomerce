@@ -77,6 +77,10 @@ const UserDropDown = (props: TProps) => {
     handleClose()
     router.push(`${ROUTE_CONFIG.MY_PROFILE}`)
   }
+  const handleNavigateChangePassword = () => {
+    handleClose()
+    router.push(`${ROUTE_CONFIG.CHANGE_PASSWORD}`)
+  }
 
   const handleLogout = () => {
     logout()
@@ -177,10 +181,21 @@ const UserDropDown = (props: TProps) => {
         <Divider />
         <MenuItem onClick={handleClose}>{user?.email}</MenuItem>
         <MenuItem onClick={handleNavigateMyProfile}>
-          <Avatar /> {t('my_profile')}
+          <Avatar>
+            <IconifyIcon icon='material-symbols-light:person' />
+          </Avatar>
+          {t('my_profile')}
+        </MenuItem>
+        <MenuItem onClick={handleNavigateChangePassword}>
+          <Avatar>
+            <IconifyIcon icon='material-symbols-light:change-circle' />
+          </Avatar>
+          {t('change_password')}
         </MenuItem>
         <MenuItem onClick={handleLogout}>
-          <ListItemIcon></ListItemIcon>
+          <Avatar>
+            <IconifyIcon icon='material-symbols-light:logout' />
+          </Avatar>
           {t('Logout')}
         </MenuItem>
       </Menu>
