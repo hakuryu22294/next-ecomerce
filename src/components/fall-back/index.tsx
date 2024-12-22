@@ -1,7 +1,9 @@
 // ** MUI Imports
 import { useTheme } from '@mui/material/styles'
 import Box, { BoxProps } from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
+
+// ** Components
+import CustomCircularProgress from '../custom-circular-progress'
 
 const FallbackSpinner = ({ sx }: { sx?: BoxProps['sx'] }) => {
   // ** Hook
@@ -19,7 +21,7 @@ const FallbackSpinner = ({ sx }: { sx?: BoxProps['sx'] }) => {
         ...sx
       }}
     >
-      <CircularProgress disableShrink sx={{ mt: 6 }} />
+      <CustomCircularProgress />
     </Box>
   )
 }
