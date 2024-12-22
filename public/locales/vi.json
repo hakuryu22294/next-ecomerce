@@ -15,5 +15,14 @@
     "City": "Thành phố",
     "enter_your_city": "Chọn thành phố của bạn",
     "Upload_avatar": "Tải ảnh đại diện",
-    "Change_avatar": "Thay đổi ảnh đại diện"
+    "Change_avatar": "Thay đổi ảnh đại diện",
+    "change_password": "Thay đổi mật khẩu",
+    "the_email_or_password_is_incorrect": "Email hoặc mật khẩu không đúng",
+    "login_success": "Đăng nhập thành công",
+    "current_password": "Mật khẩu hiện tại",
+    "new_password": "Mật khẩu mới",
+    "confirm_new_password": "Nhập lại mật khẩu mới",
+    "enter_current_password": "Nhập mật khẩu hiện tại ",
+    "enter_new_password": "Nhập mật khẩu mới",
+    "enter_confirm_new_password": "Xác nhận mật khẩu mới"
 }

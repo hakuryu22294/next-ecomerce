@@ -31,6 +31,8 @@ import loginDark from 'public/images/login-dark.png'
 
 //** Auth Hook */
 import { useAuth } from 'src/hooks/useAuth'
+import toast from 'react-hot-toast'
+import { useTranslation } from 'react-i18next'
 
 // import loginLight from 'public/images/login-light.png'
 
@@ -40,6 +42,9 @@ const LoginPage: NextPage<TProps> = () => {
   // ** State
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [isRemember, setIsRemember] = useState<boolean>(false)
+
+  // ** i18next
+  const { t } = useTranslation()
 
   // ** Auth Hook
   const { login } = useAuth()
@@ -58,7 +63,8 @@ const LoginPage: NextPage<TProps> = () => {
   const {
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    setError
   } = useForm({
     defaultValues: {
       email: 'admin@gmail.com',
@@ -70,7 +76,11 @@ const LoginPage: NextPage<TProps> = () => {
 
   const onSubmit = (data: { email: string; password: string }) => {
     if (!Object.keys(errors).length) {
-      login({ ...data, rememberMe: isRemember })
+      login({ ...data, rememberMe: isRemember }, (err: any) => {
+        if (err.response?.data.typeError === 'INVALID') {
+          toast.error(t('the_email_or_password_is_incorrect'))
+        }
+      })
     }
   }
 

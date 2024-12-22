@@ -98,7 +98,6 @@ const MyProfilePage: NextPage<TProps> = () => {
       .then(async res => {
         setLoading(false)
         const data = res.data
-        console.log('data', data)
         if (data) {
           setRoleId(data?.role?._id)
           reset({
@@ -106,7 +105,7 @@ const MyProfilePage: NextPage<TProps> = () => {
             city: data.city,
             address: data.address,
             phoneNumber: data.phoneNumber,
-            role: data.role.name,
+            role: data.role?.name,
             fullName: toFullName(data.firstName, data.middleName, data.lastName, i18n.language as 'vi' | 'en')
           })
         }
@@ -127,6 +126,7 @@ const MyProfilePage: NextPage<TProps> = () => {
 
   const onSubmit = (data: any) => {
     const { firstName, lastName, middleName } = separationFullName(data.fullName, i18n.language as 'vi' | 'en')
+
     dispatch(
       updateAuthMeAction({
         email: data.email,
@@ -226,6 +226,7 @@ const MyProfilePage: NextPage<TProps> = () => {
                     render={({ field: { onChange, onBlur, value } }) => (
                       <CustomTextField
                         required
+                        disabled
                         autoFocus
                         fullWidth
                         label='Email'

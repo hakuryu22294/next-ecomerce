@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import { createSlice } from '@reduxjs/toolkit'
 
 //** Auth Actions */
-import { registerAuthAction, updateAuthMeAction } from './action'
+import { registerAuthAction, updateAuthMeAction, changePasswordMeAction } from './action'
 
 interface DataParams {
   q: string
@@ -20,12 +20,15 @@ interface Redux {
 const initialState = {
   isLoading: false,
   isSuccess: false,
-  isSuccessUpdateMe: false,
+  message: '',
+  typeError: '',
   isError: false,
+  isSuccessUpdateMe: false,
   isErrorUpdateMe: false,
   messageUpdateMe: '',
-  message: '',
-  typeError: ''
+  isSuccessChangePassword: false,
+  isErrorChangePassword: false,
+  messageChangePassword: ''
 }
 
 export const authSlice = createSlice({
@@ -41,6 +44,9 @@ export const authSlice = createSlice({
       state.messageUpdateMe = ''
       state.message = ''
       state.typeError = ''
+      state.isSuccessChangePassword = false
+      state.isErrorChangePassword = false
+      state.messageChangePassword = ''
     }
   },
   extraReducers: builder => {
@@ -81,6 +87,26 @@ export const authSlice = createSlice({
         state.typeError = ''
       })
       .addCase(updateAuthMeAction.pending, state => {
+        state.isLoading = true
+      })
+
+    //**Change Password */
+    builder
+      .addCase(changePasswordMeAction.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccessChangePassword = !!action.payload?.data
+        state.isErrorChangePassword = !action.payload?.data
+        state.messageChangePassword = action.payload?.message
+        state.typeError = action.payload?.typeError
+      })
+      .addCase(changePasswordMeAction.rejected, state => {
+        state.isLoading = false
+        state.isSuccessChangePassword = false
+        state.isErrorChangePassword = true
+        state.messageChangePassword = ''
+        state.typeError = ''
+      })
+      .addCase(changePasswordMeAction.pending, state => {
         state.isLoading = true
       })
   }

@@ -16,7 +16,8 @@ import { loginAuth, logoutAuth } from 'src/services/auth'
 import { CONFIG_API } from 'src/configs/api'
 import { clearUserData, setLocalUserData } from 'src/helpers/storage'
 import instanceAxios from 'src/helpers/axios'
-import { error } from 'console'
+import toast from 'react-hot-toast'
+import { useTranslation } from 'react-i18next'
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -38,6 +39,9 @@ const AuthProvider = ({ children }: Props) => {
   // ** States
   const [user, setUser] = useState<UserDataType | null>(defaultProvider.user)
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading)
+
+  //* i18n
+  const { t } = useTranslation()
 
   // ** Hooks
   const router = useRouter()
@@ -70,7 +74,6 @@ const AuthProvider = ({ children }: Props) => {
   }, [])
 
   const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
-    setLoading(true)
     loginAuth({ email: params.email, password: params.password })
       .then(async response => {
         const { access_token, refresh_token, user } = response.data
@@ -79,13 +82,11 @@ const AuthProvider = ({ children }: Props) => {
         }
         const returnUrl = router.query.returnUrl
         setUser(user)
+        toast.success(t('login_success'))
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
-        setLoading(false)
         router.replace(redirectURL as string)
       })
-
       .catch(err => {
-        setLoading(false)
         if (errorCallback) errorCallback(err)
       })
   }
