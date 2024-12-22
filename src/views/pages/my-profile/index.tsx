@@ -27,6 +27,7 @@ import toast from 'react-hot-toast'
 import { resetInitState } from 'src/stores/apps/auth'
 import { updateAuthMeAction } from 'src/stores/apps/auth/action'
 import FallbackSpinner from 'src/components/fall-back'
+import Spinner from 'src/components/spinner'
 
 // import loginLight from 'public/images/login-light.png'
 
@@ -158,7 +159,8 @@ const MyProfilePage: NextPage<TProps> = () => {
 
   return (
     <>
-      {loading || (isLoading && <FallbackSpinner />)}
+      {/* <Spinner /> */}
+      {loading || (isLoading && <Spinner />)}
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <Grid container>
           <Grid
