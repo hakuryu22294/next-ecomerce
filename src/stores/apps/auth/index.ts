@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 //** Auth Actions */
 import { registerAuthAction, updateAuthMeAction, changePasswordMeAction } from './action'
+import { useTranslation } from 'react-i18next'
 
 interface DataParams {
   q: string

@@ -14,7 +14,7 @@ import authConfig from 'src/configs/auth'
 import { AuthValuesType, LoginParams, ErrCallbackType, UserDataType } from './types'
 import { loginAuth, logoutAuth } from 'src/services/auth'
 import { CONFIG_API } from 'src/configs/api'
-import { clearUserData, setLocalUserData } from 'src/helpers/storage'
+import { clearUserData, setLocalUserData, setTemporaryToken } from 'src/helpers/storage'
 import instanceAxios from 'src/helpers/axios'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
@@ -78,7 +78,11 @@ const AuthProvider = ({ children }: Props) => {
       .then(async response => {
         const { access_token, refresh_token, user } = response.data
         if (access_token && refresh_token && user) {
-          params.rememberMe ? setLocalUserData(JSON.stringify(user), access_token, refresh_token) : null
+          if (params.rememberMe) {
+            setLocalUserData(JSON.stringify(user), access_token, refresh_token)
+          } else {
+            setTemporaryToken(access_token)
+          }
         }
         const returnUrl = router.query.returnUrl
         setUser(user)
