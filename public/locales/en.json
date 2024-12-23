@@ -24,5 +24,7 @@
     "confirm_new_password": "Confirm new password",
     "enter_current_password": "Enter current password",
     "enter_new_password": "Enter new password",
-    "enter_confirm_new_password": "Enter confirm new password"
+    "enter_confirm_new_password": "Enter confirm new password",
+    "change_password_success": "Change password success",
+    "change_password_failed": "Change password failed"
 }
