@@ -1,5 +1,14 @@
 //** NEXT */
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import {
+  Collapse,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  styled,
+  ListItemTextProps,
+  Tooltip
+} from '@mui/material'
 import { NextPage } from 'next'
 import { Fragment, useEffect, useState } from 'react'
 
@@ -20,6 +29,16 @@ type TListItems = {
   disabled: boolean
   setOpenItems: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
 }
+
+const StyledListItem = styled(ListItemText)<ListItemTextProps>(({ theme }) => ({
+  '.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary': {
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    display: 'block',
+    width: '100%'
+  }
+}))
+
 const RecursiveList: NextPage<TListItems> = ({ items, openItems, level, disabled, setOpenItems }) => {
   const handleClick = (title: string) => {
     setOpenItems((prev: any) => {
@@ -49,7 +68,11 @@ const RecursiveList: NextPage<TListItems> = ({ items, openItems, level, disabled
               <ListItemIcon>
                 <IconifyIcon icon={item.icon} />
               </ListItemIcon>
-              <ListItemText primary={item.title} />
+              {!disabled && (
+                <Tooltip title={item.title}>
+                  <StyledListItem primary={item.title} />
+                </Tooltip>
+              )}
               {item.childrens && item.childrens.length > 0 && (
                 <>
                   {openItems[item.title] ? (
