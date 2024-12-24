@@ -1,5 +1,5 @@
 //MUI
-import { Avatar, Box, Button, Grid, Icon, IconButton, useTheme } from '@mui/material'
+import { Avatar, Box, Button, FormHelperText, Grid, Icon, IconButton, InputLabel, useTheme } from '@mui/material'
 
 //NEXT
 import { NextPage } from 'next'
@@ -28,6 +28,7 @@ import { resetInitState } from 'src/stores/apps/auth'
 import { updateAuthMeAction } from 'src/stores/apps/auth/action'
 import FallbackSpinner from 'src/components/fall-back'
 import Spinner from 'src/components/spinner'
+import CustomSelect from 'src/components/custom-select'
 
 // import loginLight from 'public/images/login-light.png'
 
@@ -63,6 +64,8 @@ const MyProfilePage: NextPage<TProps> = () => {
   //** Theme */
   const theme = useTheme()
 
+  //** Form */
+
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').matches(EMAIL_REG, 'Invalid email'),
     fullName: yup.string().required('Full name is required'),
@@ -71,6 +74,11 @@ const MyProfilePage: NextPage<TProps> = () => {
     role: yup.string().required('Role is required'),
     city: yup.string().notRequired()
   })
+
+  const optionsRole = [
+    { label: 'Admin', value: 'admin' },
+    { label: 'User', value: 'user' }
+  ]
 
   const defaultValues: TDefautlValues = {
     email: '',
@@ -247,20 +255,45 @@ const MyProfilePage: NextPage<TProps> = () => {
                       maxLength: 100
                     }}
                     control={control}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                      <CustomTextField
-                        disabled
-                        required
-                        autoFocus
-                        fullWidth
-                        label={t('Role')}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        value={value}
-                        placeholder={t('enter_your_role')}
-                        error={Boolean(errors.role)}
-                        helperText={errors.role?.message}
-                      />
+                    render={({ field: { onChange, value } }) => (
+                      <Box>
+                        <InputLabel
+                          sx={{
+                            marginBottom: '4px',
+                            fontSize: '13px',
+                            display: 'block',
+                            color: errors?.role
+                              ? theme.palette.error.main
+                              : `rgba(${theme.palette.customColors.main},0.42)`
+                          }}
+                        >
+                          {t('Role')}
+                        </InputLabel>
+                        <CustomSelect
+                          fullWidth
+                          label={t('Role')}
+                          onChange={onChange}
+                          options={optionsRole}
+                          value={value}
+                          placeholder={t('enter_your_role')}
+                          error={Boolean(errors.role)}
+                        />
+                        {errors.role && (
+                          <FormHelperText
+                            sx={{
+                              mb: 1,
+                              fontSize: '13px',
+                              display: 'block',
+                              color: errors?.role
+                                ? theme.palette.error.main
+                                : `rgba(${theme.palette.customColors.main},0.42)`
+                            }}
+                            error={Boolean(errors?.role)}
+                          >
+                            {errors.role?.message}
+                          </FormHelperText>
+                        )}
+                      </Box>
                     )}
                     name='role'
                   />
@@ -345,15 +378,45 @@ const MyProfilePage: NextPage<TProps> = () => {
                       maxLength: 100
                     }}
                     control={control}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                      <CustomTextField
-                        fullWidth
-                        label={t('City')}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        value={value}
-                        placeholder={t('enter_your_city')}
-                      />
+                    render={({ field: { onChange, value } }) => (
+                      <Box>
+                        <InputLabel
+                          sx={{
+                            marginBottom: '4px',
+                            fontSize: '13px',
+                            display: 'block',
+                            color: errors?.role
+                              ? theme.palette.error.main
+                              : `rgba(${theme.palette.customColors.main},0.42)`
+                          }}
+                        >
+                          {t('City')}
+                        </InputLabel>
+                        <CustomSelect
+                          fullWidth
+                          label={t('City')}
+                          onChange={onChange}
+                          options={optionsRole}
+                          value={value}
+                          placeholder={t('enter_your_city')}
+                          error={Boolean(errors.role)}
+                        />
+                        {errors.role && (
+                          <FormHelperText
+                            sx={{
+                              mb: 1,
+                              fontSize: '13px',
+                              display: 'block',
+                              color: errors?.role
+                                ? theme.palette.error.main
+                                : `rgba(${theme.palette.customColors.main},0.42)`
+                            }}
+                            error={Boolean(errors?.role)}
+                          >
+                            {errors.role?.message}
+                          </FormHelperText>
+                        )}
+                      </Box>
                     )}
                     name='city'
                   />
