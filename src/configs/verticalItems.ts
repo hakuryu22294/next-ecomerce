@@ -8,12 +8,12 @@ export const VerticalItems = [
       {
         title: 'Người dùng',
         icon: 'iconoir:group',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.SYSTEM.USER
+        path: ROUTE_CONFIG.SYSTEM.USER
       },
       {
         title: 'Nhóm vai trò',
         icon: 'icon-park-outline:permissions',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.SYSTEM.ROLE
+        path: ROUTE_CONFIG.SYSTEM.ROLE
       }
     ]
   },
@@ -24,22 +24,22 @@ export const VerticalItems = [
       {
         title: 'Danh sách sản phẩm',
         icon: 'eos-icons:products-outlined',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.PRODUCT.MANAGE_PRODUCT
+        path: ROUTE_CONFIG.MANAGE_PRODUCT.PRODUCTS
       },
       {
         title: 'Danh mục sản phẩm',
         icon: 'mdi:category-outline',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.PRODUCT.MANAGE_TYPE_PRODUCT
+        path: ROUTE_CONFIG.MANAGE_PRODUCT.TYPE_PRODUCTS
       },
       {
         title: 'Danh sách đơn hàng',
         icon: 'lets-icons:order-light',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.PRODUCT.MANAGE_ORDER
+        path: ROUTE_CONFIG.MANAGE_PRODUCT.ORDERS
       },
       {
         title: 'Danh sách đánh giá',
         icon: 'mdi:rate-review',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.PRODUCT.MANAGE_REVIEW
+        path: ROUTE_CONFIG.MANAGE_PRODUCT.REVIEWS
       }
     ]
   },
@@ -50,17 +50,17 @@ export const VerticalItems = [
       {
         title: 'Cài đặt thành phố',
         icon: 'solar:city-outline',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.SETTINGS.CITY
+        path: ROUTE_CONFIG.SETTINGS.CITY
       },
       {
         title: 'Phương thức giao hàng',
         icon: 'ic:outline-local-shipping',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.SETTINGS.DELIVERY_TYPE
+        path: ROUTE_CONFIG.SETTINGS.DELIVERY_TYPE
       },
       {
         title: 'Phương thức thanh toán',
         icon: 'hugeicons:payment-02',
-        path: ROUTE_CONFIG.MANAGE_SYSTEM.SETTINGS.PAYMENT_TYPE
+        path: ROUTE_CONFIG.SETTINGS.PAYMENT_TYPE
       }
     ]
   }
