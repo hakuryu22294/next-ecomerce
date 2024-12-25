@@ -2,6 +2,7 @@
 'use client'
 import Head from 'next/head'
 import { ReactNode } from 'react'
+import CustomDataGrid from 'src/components/custom-data-grid'
 import LayoutNotApp from 'src/views/layouts/LayoutNotApp'
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <CustomDataGrid />
     </>
   )
 }
