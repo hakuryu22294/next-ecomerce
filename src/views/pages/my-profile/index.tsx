@@ -29,6 +29,7 @@ import { updateAuthMeAction } from 'src/stores/apps/auth/action'
 import FallbackSpinner from 'src/components/fall-back'
 import Spinner from 'src/components/spinner'
 import CustomSelect from 'src/components/custom-select'
+import CustomModal from 'src/components/custom-modal'
 
 // import loginLight from 'public/images/login-light.png'
 
@@ -167,8 +168,7 @@ const MyProfilePage: NextPage<TProps> = () => {
 
   return (
     <>
-      {/* <Spinner /> */}
-      {loading || (isLoading && <Spinner />)}
+      {loading && <Spinner />}
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <Grid container>
           <Grid

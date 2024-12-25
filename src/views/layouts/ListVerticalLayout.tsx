@@ -98,12 +98,15 @@ const RecursiveList: NextPage<TListItems> = ({
                 if (item.childrens && item.childrens.length > 0) {
                   handleClick(item.title)
                 }
+                handleSelectItem(item.path)
               }}
             >
               <Box
                 sx={{
                   backgroundColor:
-                    (activePath && activePath === item.path) || openItems[item.title] ? theme.palette.primary.main : '',
+                    (activePath && activePath === item.path) || !!openItems[item.title]
+                      ? theme.palette.primary.main
+                      : '',
                   height: '30px',
                   width: '30px',
                   display: 'flex',
@@ -111,7 +114,7 @@ const RecursiveList: NextPage<TListItems> = ({
                   alignItems: 'center',
                   borderRadius: '10px',
                   color:
-                    (activePath && activePath === item.path) || openItems[item.title]
+                    (activePath && activePath === item.path) || !!openItems[item.title]
                       ? theme.palette.customColors.lightPaperBg
                       : `rgba(${theme.palette.customColors.main}, 0.7)`
                 }}
@@ -120,7 +123,7 @@ const RecursiveList: NextPage<TListItems> = ({
                   sx={{
                     marginRight: 0,
                     color:
-                      (activePath && activePath === item.path) || openItems[item.title]
+                      (activePath && activePath === item.path) || !!openItems[item.title]
                         ? `${theme.palette.customColors.lightPaperBg} !important`
                         : `rgba(${theme.palette.customColors.main}, 0.7) !important`
                   }}
@@ -132,8 +135,7 @@ const RecursiveList: NextPage<TListItems> = ({
                 <Tooltip title={item.title}>
                   <StyledListItem
                     primary={item.title}
-                    active={(activePath && activePath === item.path) || openItems[item.title]}
-                    onClick={() => handleSelectItem(item.path)}
+                    active={(activePath && activePath === item.path) || !!openItems[item.title]}
                   />
                 </Tooltip>
               )}
