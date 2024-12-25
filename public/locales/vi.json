@@ -26,5 +26,6 @@
     "enter_new_password": "Nhập mật khẩu mới",
     "enter_confirm_new_password": "Xác nhận mật khẩu mới",
     "change_password_success": "Đổi mật khẩu thành công",
-    "change_password_failed": "Đổi mật khẩu thất bại"
+    "change_password_failed": "Đổi mật khẩu thất bại",
+    "System": "Hệ thống"
 }

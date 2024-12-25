@@ -303,7 +303,13 @@ const MyProfilePage: NextPage<TProps> = () => {
           </Grid>
           <Grid item container md={6} xs={12} mt={{ xs: 5, md: 0 }}>
             <Box
-              sx={{ backgroundColor: theme.palette.background.paper, borderRadius: '15px', py: 5, px: 4 }}
+              sx={{
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: '15px',
+                py: 5,
+                px: 4,
+                width: '100%'
+              }}
               marginLeft={{ xs: 0, md: 5 }}
             >
               <Grid container spacing={4}>
