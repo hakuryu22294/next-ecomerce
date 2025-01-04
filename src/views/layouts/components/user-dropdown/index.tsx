@@ -82,6 +82,11 @@ const UserDropDown = (props: TProps) => {
     router.push(`${ROUTE_CONFIG.CHANGE_PASSWORD}`)
   }
 
+  const handleNavigateManagerSystem = () => {
+    handleClose()
+    router.push(`${ROUTE_CONFIG.DASHBOARD}`)
+  }
+
   const handleLogout = () => {
     logout()
     handleClose()
@@ -180,6 +185,12 @@ const UserDropDown = (props: TProps) => {
         </Box>
         <Divider />
         <MenuItem onClick={handleClose}>{user?.email}</MenuItem>
+        <MenuItem onClick={handleNavigateManagerSystem}>
+          <Avatar>
+            <IconifyIcon icon='material-symbols:admin-panel-settings-outline' />
+          </Avatar>
+          {t('manager_system')}
+        </MenuItem>
         <MenuItem onClick={handleNavigateMyProfile}>
           <Avatar>
             <IconifyIcon icon='material-symbols-light:person' />

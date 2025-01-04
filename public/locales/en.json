@@ -26,5 +26,7 @@
     "enter_new_password": "Enter new password",
     "enter_confirm_new_password": "Enter confirm new password",
     "change_password_success": "Change password success",
-    "change_password_failed": "Change password failed"
+    "change_password_failed": "Change password failed",
+    "System": "System",
+    "manager_system": "Manager system"
 }
