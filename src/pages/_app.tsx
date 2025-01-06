@@ -112,8 +112,8 @@ export default function App(props: ExtendedAppProps) {
   return (
     <Provider store={store}>
       <Head>
-        <title></title>
-        <meta name='description' content={} />
+        <title>{themeConfig.templateName}</title>
+        <meta name='description' content={themeConfig.templateName} />
         <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
