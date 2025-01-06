@@ -1,59 +1,58 @@
 //MUI
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  InputAdornment,
-  Typography,
-  useTheme
-} from '@mui/material'
+import { Box, Grid, useTheme } from '@mui/material'
 
 //NEXT
 import { NextPage } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 //** FORM */
-import { Controller, useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { EMAIL_REG, PASSWORD_REG } from 'src/configs/regex'
 
 //** Component */
-import IconifyIcon from 'src/components/Icon'
-import FallbackSpinner from 'src/components/fall-back'
-import CustomTextField from 'src/components/text-field'
 
 //IMAGE
-import registerDark from 'public/images/register-dark.png'
 
 //** Redux */
 import { useDispatch, useSelector } from 'react-redux'
-import { registerAuthAction } from 'src/stores/apps/auth/action'
 import { AppDispatch, RootState } from 'src/stores'
-import { resetInitState } from 'src/stores/apps/auth'
 
 //** toast */
-import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { ROUTE_CONFIG } from 'src/configs/route'
+import { getRolesAction } from 'src/stores/apps/role/action'
+import { useEffect, useState } from 'react'
+import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import { useTranslation } from 'react-i18next'
+import CustomPagination from 'src/components/custom-panigation'
+import { PAGE_SIZE_OPTION } from 'src/configs/grid'
+import CustomDataGrid from 'src/components/custom-data-grid'
 
 type TProps = {}
 
 const RoleListPage: NextPage<TProps> = () => {
-  //** Router */
-  const router = useRouter()
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTION)
 
   //** Redux */
   const dispatch: AppDispatch = useDispatch()
-  const { isLoading, isError, isSuccess, message, typeError } = useSelector((state: RootState) => state.auth)
+  const { isError, isSuccess, isLoading, roles } = useSelector((state: RootState) => state.role)
 
   //** Theme */
   const theme = useTheme()
+
+  //** Translation */
+  const { t } = useTranslation()
+
+  const handleGetRoles = () => {
+    dispatch(getRolesAction({ params: { limit: 3, page: 1, search: '' } }))
+  }
+
+  useEffect(() => {
+    handleGetRoles()
+  }, [])
+
+  const columns: GridColDef[] = [{ field: 'name', headerName: t('role_name'), width: 150 }]
+
+  const PaginationComponent = () => {
+    return <CustomPagination />
+  }
 
   return (
     <>
@@ -68,7 +67,17 @@ const RoleListPage: NextPage<TProps> = () => {
         }}
       >
         <Grid container>
-          <Grid item md={5} xs={12}></Grid>
+          <Grid item md={5} xs={12}>
+            <CustomDataGrid
+              rows={roles.data}
+              columns={columns}
+              checkboxSelection
+              disableRowSelectionOnClick
+              getRowId={row => row._id}
+              slots={{ pagination: PaginationComponent }}
+              pageSizeOptions={PAGE_SIZE_OPTION}
+            />
+          </Grid>
           <Grid item md={5} xs={12}>
             List Permission
           </Grid>

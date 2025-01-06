@@ -7,6 +7,6 @@ export const CONFIG_API = {
     CHANGE_PASSWORD: `${API_URL}/auth/change-password`
   },
   ROLE: {
-    INDEX: `${API_URL}/role`
+    INDEX: `${API_URL}/roles`
   }
 }

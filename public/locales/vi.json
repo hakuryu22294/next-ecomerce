@@ -28,5 +28,6 @@
     "change_password_success": "Đổi mật khẩu thành công",
     "change_password_failed": "Đổi mật khẩu thất bại",
     "System": "Hệ thống",
-    "manager_system": "Quản trị hệ thống"
+    "manager_system": "Quản trị hệ thống",
+    "role_name": "Nhóm vai trò"
 }
