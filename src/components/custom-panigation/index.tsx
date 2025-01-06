@@ -33,7 +33,13 @@ const CustomPagination = forwardRef((props: TProps, ref: Ref<any>) => {
         <span style={{ fontWeight: 'bold' }}>{rowLength}</span>
         <span style={{ fontWeight: 'bold' }}>{rowLength}</span>
       </Box>
-      <Box sx={{ display: 'flex', gap: '4px', alignItems: 'center' }}></Box>
+      <Box sx={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+          <span></span>
+        </Box>
+      </Box>
     </Box>
   )
 })
+
+export default CustomPagination
