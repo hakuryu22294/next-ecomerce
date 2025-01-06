@@ -124,7 +124,7 @@ const RecursiveList: NextPage<TListItems> = ({
                     marginRight: 0,
                     color:
                       (activePath && activePath === item.path) || !!openItems[item.title]
-                        ? `${theme.palette.customColors.lightPaperBg} !important`
+                        ? `${theme.palette.customColors.lightPaperBg} !important`  
                         : `rgba(${theme.palette.customColors.main}, 0.7) !important`
                   }}
                 >
