@@ -13,6 +13,7 @@ import { NextPage } from 'next'
 // ** Layouts
 import VerticalLayout from './VerticalLayout'
 import HorizontalLayout from './HorizontalLayout'
+import { useTheme } from '@mui/material'
 
 // ** Children Props
 type ChildrenProps = {
@@ -21,6 +22,8 @@ type ChildrenProps = {
 
 const UserLayout: NextPage<ChildrenProps> = ({ children }) => {
   const [open, setOpen] = React.useState(true)
+
+  const theme = useTheme()
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -41,7 +44,17 @@ const UserLayout: NextPage<ChildrenProps> = ({ children }) => {
         }}
       >
         <Toolbar />
-        <Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
+        <Container
+          sx={{
+            m: 4,
+            width: `calc(100% - 32px)`,
+            maxWidth: `calc(100% - 32px) !important`,
+            overflow: 'auto',
+            maxHeight: `calc(${theme.mixins.toolbar.minHeight} - 32px)`,
+            p: '0 !important',
+            borderRadius: '15px'
+          }}
+        >
           {children}
         </Container>
       </Box>
