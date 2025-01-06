@@ -113,10 +113,10 @@ export default function App(props: ExtendedAppProps) {
     <Provider store={store}>
       <Head>
 
-        <title>{${themeConfig.templateName}}</title>
+        <title>{themeConfig.templateName}</title>
         <meta
           name='description'
-          content={`${themeConfig.templateName}`}
+          content={themeConfig.templateName}
         />
 
         <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
