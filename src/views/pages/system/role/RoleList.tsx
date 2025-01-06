@@ -20,9 +20,10 @@ import { getRolesAction } from 'src/stores/apps/role/action'
 import { useEffect, useState } from 'react'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useTranslation } from 'react-i18next'
-import CustomPagination from 'src/components/custom-panigation'
+
 import { PAGE_SIZE_OPTION } from 'src/configs/grid'
 import CustomDataGrid from 'src/components/custom-data-grid'
+import CustomPagination from 'src/components/custom-panigation'
 
 type TProps = {}
 
@@ -51,7 +52,7 @@ const RoleListPage: NextPage<TProps> = () => {
   const columns: GridColDef[] = [{ field: 'name', headerName: t('role_name'), width: 150 }]
 
   const PaginationComponent = () => {
-    return <CustomPagination />
+    return <></>
   }
 
   return (
