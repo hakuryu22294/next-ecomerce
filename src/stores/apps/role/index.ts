@@ -1,7 +1,7 @@
 // ** Redux Imports
 import { Dispatch } from 'redux'
 import { createSlice } from '@reduxjs/toolkit'
-import { getRolesAction } from './action'
+import { createRoleAction, getRolesAction } from './action'
 
 //**  Actions */
 
@@ -21,6 +21,13 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
+  isSuccessCreateEdit: false,
+  isErrorCreateEdit: false,
+  messageCreateEdit: '',
+  isSuccessDelete: false,
+  isErrorDelete: false,
+  messageDelete: '',
+  typeError: '',
   roles: {
     data: [],
     totalCount: 0
@@ -56,6 +63,22 @@ export const roleSlice = createSlice({
       })
       .addCase(getRolesAction.pending, state => {
         state.isLoading = true
+      })
+    builder
+      .addCase(createRoleAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false
+        state.isSuccessCreateEdit = !!payload.data
+        state.isErrorCreateEdit = !payload.data
+        state.messageCreateEdit = payload.data.message
+        state.typeError = payload.data.typeError
+      })
+      .addCase(createRoleAction.rejected, (state, action) => {
+        state.isLoading = false
+
+        // state.isSuccessCreateEdit = !!payload.data
+        // state.isErrorCreateEdit = !payload.data
+        // state.messageCreateEdit = payload.data.message
+        // state.typeError = payload.data.typeError
       })
   }
 })
