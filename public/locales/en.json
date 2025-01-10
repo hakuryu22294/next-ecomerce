@@ -29,5 +29,17 @@
     "change_password_failed": "Change password failed",
     "System": "System",
     "manager_system": "Manager system",
-    "role_name": "Role name"
+    "role_name": "Role name",
+    "showing": "Showing",
+    "rows_per_page": "rows per page",
+    "of": "of",
+    "action": "Action",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "Input_your_role_name": "Input your role name",
+    "Role_name": "Role name",
+    "Required_field": "This field is required",
+    "Create_role": "Create new role",
+    "Edit_role": "Edit role"
 }

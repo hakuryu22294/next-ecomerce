@@ -29,5 +29,17 @@
     "change_password_failed": "Đổi mật khẩu thất bại",
     "System": "Hệ thống",
     "manager_system": "Quản trị hệ thống",
-    "role_name": "Nhóm vai trò"
+    "role_name": "Nhóm vai trò",
+    "showing": "Đang hiển thị",
+    "rows_per_page": "Số dòng hiển thị",
+    "of": "trên",
+    "action": "Thao tác",
+    "edit": "Chỉnh sửa",
+    "delete": "Xóa",
+    "create": "Tạo",
+    "Input_your_role_name": "Nhập vào tên vai trò của bạn",
+    "Role_name": "Tên vai trò",
+    "Required_field": "Trường này không được để trống",
+    "Create_role": "Tạo nhóm vai trò",
+    "Edit_role": "Chỉnh sửa nhóm vai trò"
 }
