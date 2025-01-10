@@ -13,7 +13,7 @@ const Card = (skin: Skin) => {
             marginRight: theme.spacing(-3)
           },
           '& .MuiTableContainer-root, & .MuiDataGrid-root, & .MuiDataGrid-columnHeaders': {
-            borderRadius: 0
+            borderRadius: '8px'
           }
         })
       },
