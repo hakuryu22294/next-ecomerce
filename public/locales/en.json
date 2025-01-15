@@ -41,5 +41,8 @@
     "Role_name": "Role name",
     "Required_field": "This field is required",
     "Create_role": "Create new role",
-    "Edit_role": "Edit role"
+    "Edit_role": "Edit role",
+    "create_role_success": "Create role success",
+    "update_role_success": "Update role success",
+    "delete_role_success": "Delete role success"
 }
