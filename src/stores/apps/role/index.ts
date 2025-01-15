@@ -1,7 +1,7 @@
 // ** Redux Imports
 import { Dispatch } from 'redux'
 import { createSlice } from '@reduxjs/toolkit'
-import { createRoleAction, getRolesAction } from './action'
+import { createRoleAction, deleteRoleAction, getRolesAction, updateRoleAction } from './action'
 
 //**  Actions */
 
@@ -42,6 +42,13 @@ export const roleSlice = createSlice({
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
+      state.isSuccessCreateEdit = false
+      state.isErrorCreateEdit = false
+      state.messageCreateEdit = ''
+      state.isSuccessDelete = false
+      state.isErrorDelete = false
+      state.messageDelete = ''
+      state.typeError = ''
     }
   },
   extraReducers: builder => {
@@ -65,20 +72,38 @@ export const roleSlice = createSlice({
         state.isLoading = true
       })
     builder
-      .addCase(createRoleAction.fulfilled, (state, { payload }) => {
-        state.isLoading = false
-        state.isSuccessCreateEdit = !!payload.data
-        state.isErrorCreateEdit = !payload.data
-        state.messageCreateEdit = payload.data.message
-        state.typeError = payload.data.typeError
-      })
-      .addCase(createRoleAction.rejected, (state, action) => {
-        state.isLoading = false
 
-        // state.isSuccessCreateEdit = !!payload.data
-        // state.isErrorCreateEdit = !payload.data
-        // state.messageCreateEdit = payload.data.message
-        // state.typeError = payload.data.typeError
+      //** Create role */
+      .addCase(createRoleAction.pending, state => {
+        state.isLoading = true
+      })
+      .addCase(createRoleAction.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccessCreateEdit = !!action.payload?.data?._id
+        state.isErrorCreateEdit = !action.payload?.data?._id
+        state.messageCreateEdit = action.payload?.message
+      })
+
+      //** Update role */
+      .addCase(updateRoleAction.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccessCreateEdit = !!action.payload?.data?._id
+        state.isErrorCreateEdit = !action.payload?.data?._id
+        state.messageCreateEdit = action.payload?.message
+      })
+      .addCase(updateRoleAction.pending, state => {
+        state.isLoading = true
+      })
+
+      //** Delete role */
+      .addCase(deleteRoleAction.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccessDelete = !!action.payload?.data?._id
+        state.isErrorDelete = !action.payload?.data?._id
+        state.messageDelete = action.payload?.message
+      })
+      .addCase(deleteRoleAction.pending, state => {
+        state.isLoading = true
       })
   }
 })

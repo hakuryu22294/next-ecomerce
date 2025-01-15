@@ -41,5 +41,8 @@
     "Role_name": "Tên vai trò",
     "Required_field": "Trường này không được để trống",
     "Create_role": "Tạo nhóm vai trò",
-    "Edit_role": "Chỉnh sửa nhóm vai trò"
+    "Edit_role": "Chỉnh sửa nhóm vai trò",
+    "create_role_success": "Tạo nhóm vai trò thành công",
+    "update_role_success": "Chỉnh sửa nhóm vai trò thành công",
+    "delete_role_success": "Xóa nhóm vai trò thành công"
 }

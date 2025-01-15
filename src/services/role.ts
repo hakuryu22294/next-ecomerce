@@ -14,13 +14,23 @@ export const getAllRoles = async (params: TParamsGetRoles) => {
   }
 }
 
+export const getDetailsRole = async (id: string) => {
+  try {
+    const res = await instanceAxios.get(`${CONFIG_API.ROLE.INDEX}/${id}`)
+
+    return res.data
+  } catch (e) {
+    return e
+  }
+}
+
 export const createRole = async (data: TParamsCreateRole) => {
   try {
     const res = await instanceAxios.post(`${CONFIG_API.ROLE.INDEX}`, data)
 
     return res.data
-  } catch (e) {
-    return e
+  } catch (e: any) {
+    return e?.response?.data
   }
 }
 
