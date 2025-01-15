@@ -11,12 +11,14 @@ import {
   Typography,
   useTheme
 } from '@mui/material'
+import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import CustomModal from 'src/components/custom-modal'
 import IconifyIcon from 'src/components/Icon'
 import CustomTextField from 'src/components/text-field'
+import { getDetailsRole } from 'src/services/role'
 import { AppDispatch } from 'src/stores'
 import { createRoleAction, updateRoleAction } from 'src/stores/apps/role/action'
 import * as yup from 'yup'
@@ -45,7 +47,8 @@ const CreateEditRole = (props: TCreateEditRole) => {
   const {
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     defaultValues,
     mode: 'onBlur',
@@ -61,6 +64,28 @@ const CreateEditRole = (props: TCreateEditRole) => {
       }
     }
   }
+
+  // ** Fetch Role info
+  const fetchDetailsRole = async (id: string) => {
+    const res = await getDetailsRole(id)
+    const data = res.data
+    if (data) {
+      reset({
+        name: data?.name
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (!open) {
+      reset({
+        name: ''
+      })
+    } else if (idRole) {
+      console.log(idRole)
+      fetchDetailsRole(idRole)
+    }
+  }, [open, idRole])
 
   return (
     <CustomModal open={open} handleClose={() => {}}>

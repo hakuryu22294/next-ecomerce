@@ -50,7 +50,8 @@ const UserLayout: NextPage<ChildrenProps> = ({ children }) => {
             width: `calc(100% - 32px)`,
             maxWidth: `calc(100% - 32px) !important`,
             overflow: 'auto',
-            maxHeight: `calc(${theme.mixins.toolbar.minHeight} - 32px)`,
+            maxHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 32px)`,
+            height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 32px)`,
             p: '0 !important',
             borderRadius: '15px'
           }}
