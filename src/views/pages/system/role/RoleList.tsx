@@ -17,7 +17,7 @@ import { AppDispatch, RootState } from 'src/stores'
 //** toast */
 import { deleteRoleAction, getRolesAction } from 'src/stores/apps/role/action'
 import { useEffect, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
+import { GridColDef, GridSortModel } from '@mui/x-data-grid'
 import { useTranslation } from 'react-i18next'
 
 import { PAGE_SIZE_OPTION } from 'src/configs/grid'
@@ -43,6 +43,9 @@ const RoleListPage: NextPage<TProps> = () => {
     id: ''
   })
 
+  const [sortBy, setSortBy] = useState('created asc')
+  const [searchBy, setSearchBy] = useState('')
+
   //** Redux */
   const dispatch: AppDispatch = useDispatch()
   const {
@@ -63,7 +66,7 @@ const RoleListPage: NextPage<TProps> = () => {
   const { t } = useTranslation()
 
   const handleGetRoles = () => {
-    dispatch(getRolesAction({ params: { limit: 10, page: 1, search: '' } }))
+    dispatch(getRolesAction({ params: { limit: 10, page: 1, search: searchBy, order: sortBy } }))
   }
   const handleCloseCreateEdit = () => {
     setOpenCreateEdit({ open: false, id: '' })
@@ -73,9 +76,14 @@ const RoleListPage: NextPage<TProps> = () => {
     dispatch(deleteRoleAction(id))
   }
 
+  const handleSort = (sort: GridSortModel) => {
+    const sortOption = sort[0]
+    setSortBy(`${sortOption.field} ${sortOption.sort}`)
+  }
+
   useEffect(() => {
     handleGetRoles()
-  }, [])
+  }, [sortBy, searchBy])
 
   useEffect(() => {
     if (isSuccessCreateEdit) {
@@ -152,7 +160,7 @@ const RoleListPage: NextPage<TProps> = () => {
           <Grid item md={5} xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
               <Box sx={{ width: '200px' }}>
-                <InputSearch />
+                <InputSearch value={searchBy} onChange={(value: string) => setSearchBy(value)} />
               </Box>
               <GridCreate onClick={() => setOpenCreateEdit({ open: true, id: '' })} />
             </Box>
@@ -161,6 +169,10 @@ const RoleListPage: NextPage<TProps> = () => {
               columns={columns}
               disableRowSelectionOnClick
               hideFooter
+              sortingMode='server'
+              onSortModelChange={(sort: GridSortModel) => {
+                handleSort(sort)
+              }}
               getRowId={row => row._id}
               autoHeight
               pagination
