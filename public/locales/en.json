@@ -44,5 +44,9 @@
     "Edit_role": "Edit role",
     "create_role_success": "Create role success",
     "update_role_success": "Update role success",
-    "delete_role_success": "Delete role success"
+    "delete_role_success": "Delete role success",
+    "title_delete_role": "Accept to delete this role?",
+    "confirm_delete_role": "Are you sure you want to delete this role?",
+    "Cancel": "Cancel",
+    "Confirm": "Confirm"
 }

@@ -44,5 +44,9 @@
     "Edit_role": "Chỉnh sửa nhóm vai trò",
     "create_role_success": "Tạo nhóm vai trò thành công",
     "update_role_success": "Chỉnh sửa nhóm vai trò thành công",
-    "delete_role_success": "Xóa nhóm vai trò thành công"
+    "delete_role_success": "Xóa nhóm vai trò thành công",
+    "title_delete_role": "Xác nhận xóa nhóm vai trò",
+    "confirm_delete_role": "Bạn có muốn xóa nhóm vai trò này không ?",
+    "Cancel": "Hủy bỏ",
+    "Confirm": "Xác nhận"
 }

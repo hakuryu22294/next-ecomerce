@@ -31,6 +31,7 @@ import CreateEditRole from './components/CreateEditRole'
 import toast from 'react-hot-toast'
 import { resetInitState } from 'src/stores/apps/role'
 import Spinner from 'src/components/spinner'
+import ConfirmationDialog from 'src/components/confirmation-dialog'
 
 type TProps = {}
 
@@ -39,6 +40,11 @@ const RoleListPage: NextPage<TProps> = () => {
   const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTION[0])
 
   const [openCreateEdit, setOpenCreateEdit] = useState({
+    open: false,
+    id: ''
+  })
+
+  const [openDeleteRole, setOpenDeleteRole] = useState({
     open: false,
     id: ''
   })
@@ -72,8 +78,12 @@ const RoleListPage: NextPage<TProps> = () => {
     setOpenCreateEdit({ open: false, id: '' })
   }
 
-  const handleDeleteRole = (id: string) => {
-    dispatch(deleteRoleAction(id))
+  const handleCloseConfirmDeleteRole = () => {
+    setOpenDeleteRole({ open: false, id: '' })
+  }
+
+  const handleDeleteRole = () => {
+    dispatch(deleteRoleAction(openDeleteRole.id))
   }
 
   const handleSort = (sort: GridSortModel) => {
@@ -119,11 +129,17 @@ const RoleListPage: NextPage<TProps> = () => {
       minWidth: 150,
       sortable: false,
       align: 'left',
-      renderCell: row => {
+      renderCell: params => {
+        const { row } = params
+
         return (
           <Box sx={{ display: 'flex', gap: '8px' }}>
-            <GridEdit onClick={() => setOpenCreateEdit({ open: true, id: String(row.id) })} />
-            <GridDelete onClick={() => handleDeleteRole(String(row.id))} />
+            {!row.permissions.some((permission: any) => ['ADMIN.GRANTED', 'BASIC.PUBLIC'].includes(permission)) && (
+              <>
+                <GridEdit onClick={() => setOpenCreateEdit({ open: true, id: String(row.id) })} />
+                <GridDelete onClick={() => setOpenDeleteRole({ open: true, id: String(row.id) })} />
+              </>
+            )}
           </Box>
         )
       }
@@ -144,6 +160,14 @@ const RoleListPage: NextPage<TProps> = () => {
 
   return (
     <>
+      <ConfirmationDialog
+        open={openDeleteRole.open}
+        onClose={handleCloseConfirmDeleteRole}
+        title={t('title_delete_role')}
+        description={t('confirm_delete_role')}
+        handleClose={handleCloseConfirmDeleteRole}
+        handleConfirm={handleDeleteRole}
+      />
       <CreateEditRole open={openCreateEdit.open} onClose={handleCloseCreateEdit} idRole={openCreateEdit.id} />
       {isLoading && <Spinner />}
       <Box
