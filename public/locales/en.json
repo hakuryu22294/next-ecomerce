@@ -48,5 +48,17 @@
     "title_delete_role": "Accept to delete this role?",
     "confirm_delete_role": "Are you sure you want to delete this role?",
     "Cancel": "Cancel",
-    "Confirm": "Confirm"
+    "Confirm": "Confirm",
+    "settings": "Settings",
+    "city_settings": "City settings",
+    "delivery_type": "Delivery type",
+    "payment_type": "Payment type",
+    "manage_product": "Manage product",
+    "products_list": "Products list",
+    "categories": "Categories",
+    "orders_management": "Orders management",
+    "reviews": "Reviews",
+    "users": "Users",
+    "systems": "Systems",
+    "roles": "Roles"
 }

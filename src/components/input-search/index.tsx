@@ -1,4 +1,4 @@
-import { alpha, InputBase, styled } from '@mui/material'
+import { alpha, InputBase, styled, useTheme } from '@mui/material'
 import IconifyIcon from '../Icon'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
@@ -52,12 +52,14 @@ const InputSearch = (props: TInputSearch) => {
   const [search, setSearch] = useState(value)
   const debounceSearch = useDebounce(search, 500)
 
+  const theme = useTheme()
+
   useEffect(() => {
     onChange(debounceSearch)
   }, [debounceSearch])
 
   return (
-    <Search>
+    <Search sx={{ backgroundColor: `${theme.palette.background.paper} !important` }}>
       <SearchIconWrapper>
         <IconifyIcon icon='material-symbols:search-rounded' />
       </SearchIconWrapper>
