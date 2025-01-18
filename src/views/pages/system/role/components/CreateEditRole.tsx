@@ -107,7 +107,16 @@ const CreateEditRole = (props: TCreateEditRole) => {
         </Box>
         <Divider />
         <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' noValidate>
-          <Box sx={{ mt: 2, width: '300px' }} minWidth={{ md: '400px', xs: '80vw' }}>
+          <Box
+            sx={{
+              mt: 2,
+              width: '300px',
+              padding: '20px',
+              backgroundColor: theme.palette.customColors.bodyBg,
+              borderRadius: '15px'
+            }}
+            minWidth={{ md: '400px', xs: '80vw' }}
+          >
             <Controller
               rules={{
                 maxLength: 100
