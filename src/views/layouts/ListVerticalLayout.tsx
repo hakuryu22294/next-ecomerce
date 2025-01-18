@@ -124,7 +124,7 @@ const RecursiveList: NextPage<TListItems> = ({
                     marginRight: 0,
                     color:
                       (activePath && activePath === item.path) || !!openItems[item.title]
-                        ? `${theme.palette.customColors.lightPaperBg} !important`  
+                        ? `${theme.palette.customColors.lightPaperBg} !important`
                         : `rgba(${theme.palette.customColors.main}, 0.7) !important`
                   }}
                 >
@@ -176,6 +176,8 @@ const ListVerticalLayout: NextPage<Tprops> = ({ open }) => {
   const [openItems, setOpenItems] = useState({})
   const [activePath, setActivePath] = useState<null | string>('')
 
+  const listVerticalItems = VerticalItems()
+
   useEffect(() => {
     if (!open) setOpenItems({})
   }, [open])
@@ -187,7 +189,7 @@ const ListVerticalLayout: NextPage<Tprops> = ({ open }) => {
       aria-labelledby='nested-list-subheader'
     >
       <RecursiveList
-        items={VerticalItems}
+        items={listVerticalItems}
         openItems={openItems}
         disabled={!open}
         setOpenItems={setOpenItems}

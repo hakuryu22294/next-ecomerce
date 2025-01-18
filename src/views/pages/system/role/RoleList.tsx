@@ -32,6 +32,7 @@ import toast from 'react-hot-toast'
 import { resetInitState } from 'src/stores/apps/role'
 import Spinner from 'src/components/spinner'
 import ConfirmationDialog from 'src/components/confirmation-dialog'
+import IconifyIcon from 'src/components/Icon'
 
 type TProps = {}
 
@@ -128,17 +129,20 @@ const RoleListPage: NextPage<TProps> = () => {
       headerName: t('action'),
       minWidth: 150,
       sortable: false,
-      align: 'left',
+      align: 'center',
+      headerAlign: 'center',
       renderCell: params => {
         const { row } = params
 
         return (
-          <Box sx={{ display: 'flex', gap: '8px' }}>
-            {!row.permissions.some((permission: any) => ['ADMIN.GRANTED', 'BASIC.PUBLIC'].includes(permission)) && (
+          <Box sx={{ display: 'flex', gap: '8px', justifyContent: 'center', width: '100%' }}>
+            {!row.permissions.some((permission: any) => ['ADMIN.GRANTED', 'BASIC.PUBLIC'].includes(permission)) ? (
               <>
                 <GridEdit onClick={() => setOpenCreateEdit({ open: true, id: String(row.id) })} />
                 <GridDelete onClick={() => setOpenDeleteRole({ open: true, id: String(row.id) })} />
               </>
+            ) : (
+              <IconifyIcon icon='ic:outline-lock' />
             )}
           </Box>
         )
