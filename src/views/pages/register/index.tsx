@@ -40,6 +40,7 @@ import { resetInitState } from 'src/stores/apps/auth'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { ROUTE_CONFIG } from 'src/configs/route'
+import { useTranslation } from 'react-i18next'
 
 type TProps = {}
 
@@ -56,6 +57,8 @@ const RegisterPage: NextPage<TProps> = () => {
   //** Redux */
   const dispatch: AppDispatch = useDispatch()
   const { isLoading, isError, isSuccess, message, typeError } = useSelector((state: RootState) => state.auth)
+
+  const {t} = useTranslation()
 
   //** Theme */
   const theme = useTheme()
@@ -104,7 +107,6 @@ const RegisterPage: NextPage<TProps> = () => {
   }
 
   useEffect(() => {
-    console.log({ isError, isSuccess, message })
     if (message) {
       if (isError) {
         toast.error(message)
@@ -151,10 +153,10 @@ const RegisterPage: NextPage<TProps> = () => {
           }}
         >
           <Typography component='h1' variant='h5'>
-            Register
+            {t('Register')}
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-            <Box>
+            <Box sx={{ width:'400px' }}>
               <Controller
                 rules={{
                   required: true
@@ -164,12 +166,12 @@ const RegisterPage: NextPage<TProps> = () => {
                   <CustomTextField
                     required
                     fullWidth
-                    label='Email Address'
+                    label={t('Email')}
                     autoComplete='email'
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
-                    placeholder='Input your email'
+                    placeholder={t('enter_your_email')}
                     error={Boolean(errors.email)}
                     helperText={errors.email?.message}
                   />
@@ -187,12 +189,12 @@ const RegisterPage: NextPage<TProps> = () => {
                   <CustomTextField
                     required
                     fullWidth
-                    label='Password'
+                    label={t('Password')}
                     type={showPassword ? 'text' : 'password'}
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
-                    placeholder='Input your password'
+                    placeholder={t('enter_your_password')}
                     error={Boolean(errors.password)}
                     helperText={errors.password?.message}
                     InputProps={{
@@ -223,12 +225,12 @@ const RegisterPage: NextPage<TProps> = () => {
                   <CustomTextField
                     required
                     fullWidth
-                    label='Confirm Password'
+                    label={t('confirm_password')}
                     type={showConfirmPassword ? 'text' : 'password'}
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
-                    placeholder='Enter confirm password'
+                    placeholder={t('enter_confirm_password')}
                     error={Boolean(errors.password)}
                     helperText={errors.confirmPassword?.message}
                     InputProps={{
@@ -249,26 +251,13 @@ const RegisterPage: NextPage<TProps> = () => {
                 name='confirmPassword'
               />
             </Box>
-
-            <FormControlLabel
-              control={
-                <Checkbox
-                  value='remember'
-                  color='primary'
-                  checked={isRemember}
-                  onChange={() => setIsRemember(!isRemember)}
-                />
-              }
-              label='Remember me'
-            />
-            <Link href='#'>Forgot password?</Link>
             <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-              Register Now
+              {t('Register')}
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-              <Typography>{'You have an account? '}</Typography>
+              <Typography>{t('you_have_an_account')}</Typography>
 
-              <Link href='/login'>{'Login'}</Link>
+              <Link style={{ color: theme.palette.primary.main }} href='/login'>{t('sign_in')}</Link>
             </Box>
             <Typography sx={{ textAlign: 'center', my: 2 }}>Or</Typography>
             <Box>

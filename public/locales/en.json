@@ -3,8 +3,15 @@
     "my_profile": "My Profile",
     "sign_in": "Sign In",
     "Logout": "Logout",
+    "Register": "Register",
+    "remember_me": "Remember me",
+    "Email": "Email Address",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
     "enter_your_email": "Enter your email",
     "enter_your_role": "Enter your role",
+    "enter_your_password": "Enter your password",
+    "enter_confirm_password": "Enter confirm password",
     "Role": "Role",
     "enter_your_address": "Enter your address",
     "Address": "Address",
@@ -60,5 +67,8 @@
     "reviews": "Reviews",
     "users": "Users",
     "systems": "Systems",
-    "roles": "Roles"
+    "roles": "Roles",
+    "forgot_password": "Forgot password",
+    "you_have_an_account": "You have an account?",
+    "dont_have_an_account": "Don't have an account?"
 }

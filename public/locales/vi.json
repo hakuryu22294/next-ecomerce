@@ -3,8 +3,15 @@
     "my_profile": "Trang cá nhân",
     "sign_in": "Đăng nhập",
     "Logout": "Đăng xuất",
+    "Register": "Đăng ký",
+    "Email": "Địa chỉ Email",
+    "remember_me": "Ghi nhớ đăng nhập",
     "enter_your_email": "Nhập email của bạn",
     "enter_your_role": "Nhập vai trò của bạn",
+    "enter_your_password": "Nhập vào mật khẩu",
+    "password": "Mật khẩu",
+    "confirm_password": "Xác nhận mật khẩu",
+    "enter_confirm_password": "Nhập xác nhận mật khẩu",
     "Role": "Nhóm vai trò",
     "enter_your_address": "Nhập địa chỉ của bạn",
     "Address": "Địa chỉ",
@@ -60,5 +67,8 @@
     "reviews": "Đánh giá",
     "users": "Người dùng",
     "systems": "Quản trị hệ thống",
-    "roles": "Nhóm vai trò"
+    "roles": "Nhóm vai trò",
+    "forgot_password": "Bạn quên mật khẩu ?",
+    "you_have_an_account": "Bạn đã có tài khoản ?",
+    "dont_have_an_account": "Bạn chưa có tài khoản ?"
 }

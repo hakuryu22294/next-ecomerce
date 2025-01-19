@@ -38,11 +38,14 @@ const CustomPlaceHolder = styled(InputLabel)<InputLabelProps>(({ theme }) => ({
 const CustomSelect = (props: TCustomSelect) => {
   const { value, label, onChange, options, fullWidth, placeholder, ...rest } = props
   const { t } = useTranslation()
+ 
+
+  console.log('value', value)
+  
 
   return (
     <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
-      {/* {((Array.isArray(value) && !value.length) || !value) && } */}
-      <CustomPlaceHolder>{placeholder}</CustomPlaceHolder>
+      {((Array.isArray(value) && !value.length) || !value) && <CustomPlaceHolder>{placeholder}</CustomPlaceHolder>}
       <StyledSelect
         required
         fullWidth={fullWidth}
