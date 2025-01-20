@@ -1,6 +1,7 @@
-import { t } from 'i18next'
 
-export const OBJECT_TYPE_ERROR_ROLE = {
-  "ALREADY_EXISTS": t('data_existed_in_system')
+
+export const OBJECT_TYPE_ERROR_ROLE: Record<string, string> = {
+  ALREADY_EXIST: 'data_existed_in_system',
+  INTERNAL_SERVER_ERROR: 'internal_server_error'
 }
   

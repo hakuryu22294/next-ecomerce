@@ -70,5 +70,9 @@
     "roles": "Nhóm vai trò",
     "forgot_password": "Bạn quên mật khẩu ?",
     "you_have_an_account": "Bạn đã có tài khoản ?",
-    "dont_have_an_account": "Bạn chưa có tài khoản ?"
+    "dont_have_an_account": "Bạn chưa có tài khoản ?",
+    "data_existed_in_system": "Dữ liệu đã có trong hệ thống",
+    "internal_server_error": "Lỗi hệ thống, vui lòng thử lại sau",
+    "update_role_error": "Cập nhật nhóm vai trò thất bại !",
+    "create_role_error": "Tạo nhóm vai trò thất bại !"
 }

@@ -70,5 +70,9 @@
     "roles": "Roles",
     "forgot_password": "Forgot password",
     "you_have_an_account": "You have an account?",
-    "dont_have_an_account": "Don't have an account?"
+    "dont_have_an_account": "Don't have an account?",
+    "data_existed_in_system": "Data existed in system",
+    "internal_server_error": "Internal server error, please try again later",
+    "update_role_error": "Update role failed !",
+    "create_role_error": "Create role failed !"
 }

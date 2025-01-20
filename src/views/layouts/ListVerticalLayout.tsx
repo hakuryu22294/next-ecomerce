@@ -17,7 +17,7 @@ import { Fragment, useEffect, useState } from 'react'
 
 //** COMPONENTS */
 import IconifyIcon from 'src/components/Icon'
-import { VerticalItems } from 'src/configs/verticalItems'
+import { TVertical, VerticalItems } from 'src/configs/verticalItems'
 import { hexToRGBA } from 'src/utils/hex-to-rgba'
 
 type Tprops = {
@@ -77,9 +77,19 @@ const RecursiveList: NextPage<TListItems> = ({
     if (path) router.push(path)
   }
 
+  const isParentHasChildActive = (item:TVertical): boolean => {
+    if(!item.childrens){
+      return item.path === activePath
+    }
+
+    return item.childrens.some((item: TVertical) => isParentHasChildActive(item))
+  }
+
   return (
     <>
       {items.map((item: any) => {
+        const isParentActive = isParentHasChildActive(item)
+
         return (
           <Fragment key={item.title}>
             <ListItemButton
@@ -98,13 +108,15 @@ const RecursiveList: NextPage<TListItems> = ({
                 if (item.childrens && item.childrens.length > 0) {
                   handleClick(item.title)
                 }
-                handleSelectItem(item.path)
+                if(item.path){
+                  handleSelectItem(item.path)
+                }
               }}
             >
               <Box
                 sx={{
                   backgroundColor:
-                    (activePath && activePath === item.path) || !!openItems[item.title]
+                    (activePath && activePath === item.path) || !!openItems[item.title] || isParentActive
                       ? theme.palette.primary.main
                       : '',
                   height: '30px',
@@ -114,7 +126,7 @@ const RecursiveList: NextPage<TListItems> = ({
                   alignItems: 'center',
                   borderRadius: '10px',
                   color:
-                    (activePath && activePath === item.path) || !!openItems[item.title]
+                    (activePath && activePath === item.path) || !!openItems[item.title] || isParentActive
                       ? theme.palette.customColors.lightPaperBg
                       : `rgba(${theme.palette.customColors.main}, 0.7)`
                 }}
@@ -123,7 +135,7 @@ const RecursiveList: NextPage<TListItems> = ({
                   sx={{
                     marginRight: 0,
                     color:
-                      (activePath && activePath === item.path) || !!openItems[item.title]
+                      (activePath && activePath === item.path) || !!openItems[item.title] || isParentActive
                         ? `${theme.palette.customColors.lightPaperBg} !important`
                         : `rgba(${theme.palette.customColors.main}, 0.7) !important`
                   }}
@@ -135,16 +147,16 @@ const RecursiveList: NextPage<TListItems> = ({
                 <Tooltip title={item.title}>
                   <StyledListItem
                     primary={item.title}
-                    active={(activePath && activePath === item.path) || !!openItems[item.title]}
+                    active={(activePath && activePath === item.path) || !!openItems[item.title] || isParentActive}
                   />
                 </Tooltip>
               )}
               {item.childrens && item.childrens.length > 0 && (
                 <>
-                  {openItems[item.title] ? (
-                    <IconifyIcon icon='ic:twotone-expand-less' style={{ transform: 'rotate(180deg)' }} />
+                  {isParentActive ? (
+                    <IconifyIcon icon='ic:twotone-expand-more' style={{ transform: 'rotate(180deg)',  color:isParentActive ? theme.palette.primary.main : `rgba(${theme.palette.customColors.main}, 0.7)` }} />
                   ) : (
-                    <IconifyIcon icon='ic:twotone-expand-less' />
+                    <IconifyIcon icon='ic:twotone-expand-less' style={{ color:isParentActive ? theme.palette.primary.main : `rgba(${theme.palette.customColors.main}, 0.7})` }} />
                   )}
                 </>
               )}
@@ -175,6 +187,8 @@ const ListVerticalLayout: NextPage<Tprops> = ({ open }) => {
   //** STATE */
   const [openItems, setOpenItems] = useState({})
   const [activePath, setActivePath] = useState<null | string>('')
+
+  console.log(activePath)
 
   const listVerticalItems = VerticalItems()
 
