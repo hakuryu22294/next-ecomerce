@@ -82,7 +82,6 @@ const CreateEditRole = (props: TCreateEditRole) => {
         name: ''
       })
     } else if (idRole) {
-      console.log(idRole)
       fetchDetailsRole(idRole)
     }
   }, [open, idRole])

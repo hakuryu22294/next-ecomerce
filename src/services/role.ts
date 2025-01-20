@@ -1,6 +1,6 @@
 import { CONFIG_API } from 'src/configs/api'
 import instanceAxios from 'src/helpers/axios'
-import { TParamsCreateRole, TParamsDeleteRole, TParamsEditRole, TParamsGetRoles } from 'src/types/role'
+import { TParamsCreateRole, TParamsEditRole, TParamsGetRoles } from 'src/types/role'
 
 export const getAllRoles = async (params: TParamsGetRoles) => {
   try {
@@ -40,8 +40,9 @@ export const updateRole = async (data: TParamsEditRole) => {
     const res = await instanceAxios.put(`${CONFIG_API.ROLE.INDEX}/${id}`, rests)
 
     return res.data
-  } catch (e) {
-    return e
+  } catch (e:any) {
+    return e?.response?.data
+  
   }
 }
 

@@ -30,12 +30,13 @@ import FallbackSpinner from 'src/components/fall-back'
 import Spinner from 'src/components/spinner'
 import CustomSelect from 'src/components/custom-select'
 import CustomModal from 'src/components/custom-modal'
+import { getAllRoles } from 'src/services/role'
 
 // import loginLight from 'public/images/login-light.png'
 
 type TProps = {}
 
-type TDefautlValues = {
+type TDefaultValues = {
   email: string
   address: string
   phoneNumber: string
@@ -51,7 +52,8 @@ const MyProfilePage: NextPage<TProps> = () => {
   //** State */
   const [loading, setLoading] = useState(true)
   const [avatar, setAvatar] = useState(user?.avatar || '')
-  const [roleId, setRoleId] = useState('')
+
+  const [optionRoles, setOptionRoles] = useState<{label:string,value:string}[]>([])
 
   //** i18n */
   const { t, i18n } = useTranslation()
@@ -71,7 +73,7 @@ const MyProfilePage: NextPage<TProps> = () => {
     email: yup.string().required('Email is required').matches(EMAIL_REG, 'Invalid email'),
     fullName: yup.string().required('Full name is required'),
     address: yup.string().notRequired(),
-    phoneNumber: yup.string().required('Phone number is required'),
+    phoneNumber: yup.string().notRequired(),
     role: yup.string().required('Role is required'),
     city: yup.string().notRequired()
   })
@@ -81,7 +83,7 @@ const MyProfilePage: NextPage<TProps> = () => {
     { label: 'User', value: 'user' }
   ]
 
-  const defaultValues: TDefautlValues = {
+  const defaultValues: TDefaultValues = {
     email: '',
     city: '',
     address: '',
@@ -89,6 +91,8 @@ const MyProfilePage: NextPage<TProps> = () => {
     role: '',
     fullName: ''
   }
+
+
 
   const {
     handleSubmit,
@@ -108,13 +112,12 @@ const MyProfilePage: NextPage<TProps> = () => {
         setLoading(false)
         const data = res.data
         if (data) {
-          setRoleId(data?.role?._id)
           reset({
             email: data.email,
             city: data.city,
             address: data.address,
             phoneNumber: data.phoneNumber,
-            role: data.role?.name,
+            role: data?.role?._id,
             fullName: toFullName(data.firstName, data.middleName, data.lastName, i18n.language as 'vi' | 'en')
           })
         }
@@ -122,6 +125,24 @@ const MyProfilePage: NextPage<TProps> = () => {
       .catch(() => {
         setLoading(false)
       })
+  }
+
+  const fetchAllRoles = async() => {
+    setLoading(true)
+    await getAllRoles({
+      page: -1,
+      limit: -1,
+    }).then(res => {
+      setLoading(true)
+      const data = res?.data?.roles
+      if(data){
+        setOptionRoles(data.map((item: {name:string, _id:string}) => ({label: item?.name, value: item?._id})))
+      }
+      setLoading(false)
+    }).catch((e) => {
+      setLoading(false)
+    })
+   
   }
 
   const handleUploadAvatar = async (file: File) => {
@@ -142,7 +163,7 @@ const MyProfilePage: NextPage<TProps> = () => {
         firstName,
         middleName,
         lastName,
-        role: roleId,
+        role: data.role,
         phoneNumber: data.phoneNumber,
         address: data.address,
         city: data.city,
@@ -165,6 +186,10 @@ const MyProfilePage: NextPage<TProps> = () => {
   useEffect(() => {
     fetchGetAuthMe()
   }, [i18n.language])
+
+  useEffect(() => {
+    fetchAllRoles()
+  },[])
 
   return (
     <>
@@ -255,46 +280,54 @@ const MyProfilePage: NextPage<TProps> = () => {
                       maxLength: 100
                     }}
                     control={control}
-                    render={({ field: { onChange, value } }) => (
-                      <Box>
-                        <InputLabel
-                          sx={{
-                            marginBottom: '4px',
-                            fontSize: '13px',
-                            display: 'block',
-                            color: errors?.role
-                              ? theme.palette.error.main
-                              : `rgba(${theme.palette.customColors.main},0.42)`
-                          }}
-                        >
-                          {t('Role')}
-                        </InputLabel>
-                        <CustomSelect
-                          fullWidth
-                          label={t('Role')}
-                          onChange={onChange}
-                          options={optionsRole}
-                          value={value}
-                          placeholder={t('enter_your_role')}
-                          error={Boolean(errors.role)}
-                        />
-                        {errors.role && (
-                          <FormHelperText
+                    render={({ field: { onChange, value, onBlur } }) => {                  
+
+                      return (
+                        <Box>
+                          <InputLabel
                             sx={{
-                              mb: 1,
+                              marginBottom: '4px',
                               fontSize: '13px',
                               display: 'block',
                               color: errors?.role
                                 ? theme.palette.error.main
                                 : `rgba(${theme.palette.customColors.main},0.42)`
                             }}
-                            error={Boolean(errors?.role)}
                           >
-                            {errors.role?.message}
-                          </FormHelperText>
-                        )}
-                      </Box>
-                    )}
+                            {t('Role')}
+                          </InputLabel>
+                          <CustomSelect
+                            disabled
+                            onBlur={onBlur}
+                            fullWidth
+                            label={t('Role')}
+                            onChange={onChange}
+                            options={optionRoles}
+                            value={value}
+                            placeholder={t('enter_your_role')}
+                            error={Boolean(errors.role)}
+                          />
+                          {errors?.role && (
+                            <FormHelperText
+                              sx={{
+                                mb: 1,
+                                fontSize: '13px',
+                                display: 'block',
+                                color: errors?.role
+                                  ? theme.palette.error.main
+                                  : `rgba(${theme.palette.customColors.main},0.42)`
+                              }}
+                              error={Boolean(errors?.role)}
+                            >
+                              {errors?.role?.message}
+                            </FormHelperText>
+                          )}
+                        </Box>
+                      )
+                     
+                    }
+                      
+                    }
                     name='role'
                   />
                 </Grid>
@@ -364,7 +397,7 @@ const MyProfilePage: NextPage<TProps> = () => {
                     control={control}
                     render={({ field: { onChange, onBlur, value } }) => (
                       <CustomTextField
-                        required
+                        
                         fullWidth
                         label={t('Phone_number')}
                         onChange={onChange}
@@ -400,6 +433,7 @@ const MyProfilePage: NextPage<TProps> = () => {
                         </InputLabel>
                         <CustomSelect
                           fullWidth
+                         
                           label={t('City')}
                           onChange={onChange}
                           options={optionsRole}

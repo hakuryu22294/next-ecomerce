@@ -289,14 +289,14 @@ const ChangePasswordPage: NextPage<TProps> = () => {
                 name='confirmNewPassword'
               />
             </Box>
-            <Link href='#'>Forgot password?</Link>
+            <Link style={{ color: theme.palette.primary.main }} href='#'>{t('forgot_password')}</Link>
             <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
               {t('change_password')}
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-              <Typography>{'You have an account? '}</Typography>
+              <Typography>{t('you_have_an_account')}</Typography>
 
-              <Link href='/login'>{'Login'}</Link>
+              <Link style={{ color: theme.palette.primary.main }} href='/login'>{t('sign_in')}</Link>
             </Box>
             <Typography sx={{ textAlign: 'center', my: 2 }}>Or</Typography>
             <Box>
