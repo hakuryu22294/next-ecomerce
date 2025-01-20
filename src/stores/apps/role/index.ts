@@ -66,6 +66,7 @@ export const roleSlice = createSlice({
         state.isSuccess = false
         state.isError = true
         state.roles.data = []
+        
         state.roles.totalCount = 0
       })
       .addCase(getRolesAction.pending, state => {
@@ -82,6 +83,7 @@ export const roleSlice = createSlice({
         state.isSuccessCreateEdit = !!action.payload?.data?._id
         state.isErrorCreateEdit = !action.payload?.data?._id
         state.messageCreateEdit = action.payload?.message
+        state.typeError = action.payload?.typeError
       })
 
       //** Update role */
@@ -90,6 +92,8 @@ export const roleSlice = createSlice({
         state.isSuccessCreateEdit = !!action.payload?.data?._id
         state.isErrorCreateEdit = !action.payload?.data?._id
         state.messageCreateEdit = action.payload?.message
+        state.typeError = action.payload?.typeError
+        
       })
       .addCase(updateRoleAction.pending, state => {
         state.isLoading = true

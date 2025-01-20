@@ -125,10 +125,10 @@ const LoginPage: NextPage<TProps> = () => {
         }}
       >
         <Typography component='h1' variant='h5'>
-          Sign in
+          {t('sign_in')}
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-          <Box sx={{ width: '300px' }}>
+          <Box sx={{ width: '400px' }}>
             <Controller
               rules={{
                 required: true
@@ -138,12 +138,12 @@ const LoginPage: NextPage<TProps> = () => {
                 <CustomTextField
                   required
                   fullWidth
-                  label='Email Address'
+                  label={t('Email')}
                   autoComplete='email'
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
-                  placeholder='Input your email'
+                  placeholder={t('enter_your_email')}
                   error={Boolean(errors.email)}
                   helperText={errors.email?.message}
                 />
@@ -151,7 +151,7 @@ const LoginPage: NextPage<TProps> = () => {
               name='email'
             />
           </Box>
-          <Box sx={{ mt: 2, width: '300px' }}>
+          <Box sx={{ mt: 2, width: '400px' }}>
             <Controller
               rules={{
                 maxLength: 100
@@ -161,7 +161,7 @@ const LoginPage: NextPage<TProps> = () => {
                 <CustomTextField
                   required
                   fullWidth
-                  label='Password'
+                  label={t("password")}
                   type={showPassword ? 'text' : 'password'}
                   onChange={onChange}
                   onBlur={onBlur}
@@ -193,16 +193,16 @@ const LoginPage: NextPage<TProps> = () => {
                 onChange={() => setIsRemember(!isRemember)}
               />
             }
-            label='Remember me'
+            label={t('remember_me')}
           />
-          <Link href='#'>Forgot password?</Link>
-          <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-            Sign In
+          <Link style={{color: theme.palette.primary.main}} href='#'>{t('forgot_password')}</Link>
+          <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2 , width: '400px', display:"block"}}>
+            {t('sign_in')}
           </Button>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-            <Typography>{"Don't have an account? "}</Typography>
+            <Typography>{t("dont_have_an_account")}</Typography>
 
-            <Link href='/register'>{'Register'}</Link>
+            <Link style={{color: theme.palette.primary.main}} href='/register'>{t("Register")}</Link>
           </Box>
           <Typography sx={{ textAlign: 'center', my: 2 }}>Or</Typography>
           <Box>
