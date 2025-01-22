@@ -35,6 +35,7 @@ import IconifyIcon from 'src/components/Icon'
 
 //** Toast */
 import toast from 'react-hot-toast'
+import TablePermissions from './components/TablePermissions'
 
 type TProps = {}
 
@@ -204,9 +205,9 @@ const RoleListPage: NextPage<TProps> = () => {
           height: '100%'
         }}
       >
-        <Grid container sx={{ height: '100%', width: '100%' }}>
-          <Grid item md={5} xs={12}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Grid container sx={{ height: '100%', width: '100%' }} spacing={10}>
+          <Grid item md={4} xs={12} >
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }} >
               <Box sx={{ width: '200px' }}>
                 <InputSearch value={searchBy} onChange={(value: string) => setSearchBy(value)} />
               </Box>
@@ -230,8 +231,8 @@ const RoleListPage: NextPage<TProps> = () => {
               disableColumnMenu
             />
           </Grid>
-          <Grid item md={7} xs={12}>
-            List Permission
+          <Grid item md={8} xs={12}>
+            <TablePermissions />
           </Grid>
         </Grid>
       </Box>

@@ -61,9 +61,11 @@
     "delivery_type": "Delivery type",
     "payment_type": "Payment type",
     "manage_product": "Manage product",
+    "product": "Product",
     "products_list": "Products list",
     "categories": "Categories",
     "orders_management": "Orders management",
+    "orders": "Orders",
     "reviews": "Reviews",
     "users": "Users",
     "systems": "Systems",
@@ -74,5 +76,11 @@
     "data_existed_in_system": "Data existed in system",
     "internal_server_error": "Internal server error, please try again later",
     "update_role_error": "Update role failed !",
-    "create_role_error": "Create role failed !"
+    "create_role_error": "Create role failed !",
+    "Manage_product": "Manage Product",
+    "Update": "Update",
+    "View": "View",
+    "Delete": "Delete",
+    "Create": "Create",
+    "All": "All"
 }
