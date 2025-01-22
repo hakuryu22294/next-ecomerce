@@ -61,10 +61,12 @@
     "delivery_type": "Phương thức vận chuyển",
     "payment_type": "Phương thức thanh toán",
     "manage_product": "Quản trị sản phẩm",
+    "product": "Sản phẩm",
     "products_list": "Danh sách sản phẩm",
     "categories": "Danh mục sản phẩm",
     "orders_management": "Quản trị đơn hàng",
     "reviews": "Đánh giá",
+    "orders": "Đơn hàng",
     "users": "Người dùng",
     "systems": "Quản trị hệ thống",
     "roles": "Nhóm vai trò",
@@ -74,5 +76,10 @@
     "data_existed_in_system": "Dữ liệu đã có trong hệ thống",
     "internal_server_error": "Lỗi hệ thống, vui lòng thử lại sau",
     "update_role_error": "Cập nhật nhóm vai trò thất bại !",
-    "create_role_error": "Tạo nhóm vai trò thất bại !"
+    "create_role_error": "Tạo nhóm vai trò thất bại !",
+    "Update": "Cập nhật",
+    "View": "Xem",
+    "Delete": "Xóa",
+    "Create": "Tạo",
+    "All": "Tất cả"
 }
