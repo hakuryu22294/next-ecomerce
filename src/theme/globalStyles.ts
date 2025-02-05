@@ -54,7 +54,22 @@ const GlobalStyles = (theme: Theme) => {
         position: 'fixed',
         backgroundColor: theme.palette.primary.main
       }
-    }
+    },
+    "::-webkit-scrollbar": {
+      width: "8px", 
+      height: "8px" 
+    },
+    "::-webkit-scrollbar-track": {
+      background: "#f1f1f1",
+      borderRadius: "10px"
+    },
+    "::-webkit-scrollbar-thumb": {
+      background: `rgba(${theme.palette.primary.main},0.5)`,
+      borderRadius: "10px",
+      "&:hover": {
+        background: "#555"
+      }
+    },
   }
 }
 

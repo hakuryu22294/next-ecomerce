@@ -1,6 +1,9 @@
-export const PERMISSIONS ={
+export const PERMISSIONS:any ={
     ADMIN:"ADMIN.GRANTED",
     BASIC:"BASIC.PUBLIC",
+    DASHBOARD:{
+        VIEW:"DASHBOARD.VIEW"
+    },
     MANAGE_PRODUCT:{
         PRODUCT:{
             CREATE:"MANAGE_PRODUCT.PRODUCT.CREATE",
@@ -8,7 +11,6 @@ export const PERMISSIONS ={
             DELETE:"MANAGE_PRODUCT.PRODUCT.DELETE"
         },
         PRODUCT_TYPE:{
-            VIEW:"MANAGE_PRODUCT.PRODUCT_TYPE.VIEW",
             CREATE:"MANAGE_PRODUCT.PRODUCT_TYPE.CREATE",
             UPDATE:"MANAGE_PRODUCT.PRODUCT_TYPE.UPDATE",
             DELETE:"MANAGE_PRODUCT.PRODUCT_TYPE.DELETE"
@@ -30,8 +32,6 @@ export const PERMISSIONS ={
    },
    MANAGE_ORDER:{
     REVIEW:{
-        VIEW:"MANAGE_ORDER.REVIEW.VIEW",
-        CREATE:"MANAGE_ORDER.REVIEW.CREATE",
         UPDATE:"MANAGE_ORDER.REVIEW.UPDATE",
         DELETE:"MANAGE_ORDER.REVIEW.DELETE"
     },
@@ -44,19 +44,16 @@ export const PERMISSIONS ={
    },
    SETTING:{
     DELIVERY_TYPE:{
-        VIEW:"SETTING.DELIVERY_TYPE.VIEW",
         CREATE:"SETTING.DELIVERY_TYPE.CREATE",
         UPDATE:"SETTING.DELIVERY_TYPE.UPDATE",
         DELETE:"SETTING.DELIVERY_TYPE.DELETE"
     },
     PAYMENT_TYPE:{
-        VIEW:"SETTING.PAYMENT_TYPE.VIEW",
         CREATE:"SETTING.PAYMENT_TYPE.CREATE",
         UPDATE:"SETTING.PAYMENT_TYPE.UPDATE",
         DELETE:"SETTING.PAYMENT_TYPE.DELETE"
     },
     CITY:{
-        VIEW:"SETTING.CITY.VIEW",
         CREATE:"SETTING.CITY.CREATE",
         UPDATE:"SETTING.CITY.UPDATE",
         DELETE:"SETTING.CITY.DELETE"
@@ -66,65 +63,70 @@ export const PERMISSIONS ={
 }
 
 export const LIST_DATA_PERMISSIONS:any = [
+
+    {
+        id:14,
+        name:"Dashboard",
+        value:"DASHBOARD",
+        isParent:false,
+        isHideCreate:true,
+        isHideUpdate:true,
+        isHideDelete:true
+    },
     {
         id:1,
         name:"manage_product",
         isParent:true,
+        value:"MANAGE_PRODUCT"
     },
     {
         id:2,
         name:"product",
         isParent:false,
-        create:PERMISSIONS.MANAGE_PRODUCT.PRODUCT.CREATE,
-        update:PERMISSIONS.MANAGE_PRODUCT.PRODUCT.UPDATE,
-        delete:PERMISSIONS.MANAGE_PRODUCT.PRODUCT.DELETE,
+        value:"PRODUCT",
+        parentValue:"MANAGE_PRODUCT",
         isHideView:true
     },
     {
         id:3,
         name:"categories",
         isParent:false,
-        create:PERMISSIONS.MANAGE_PRODUCT.PRODUCT_TYPE.CREATE,
-        update:PERMISSIONS.MANAGE_PRODUCT.PRODUCT_TYPE.UPDATE,
-        delete:PERMISSIONS.MANAGE_PRODUCT.PRODUCT_TYPE.DELETE,
-        view: PERMISSIONS.MANAGE_PRODUCT.PRODUCT_TYPE.VIEW,
+        value:"PRODUCT_TYPE",
+        parentValue:"MANAGE_PRODUCT",
+        isHideView:true
     },
     {
         id:4,
         name:"systems",
+        value:"SYSTEM",
         isParent:true
     },
     {
         id:5,
         name:"users",
         isParent:false,
-        create:PERMISSIONS.SYSTEM.USER.CREATE,
-        update:PERMISSIONS.SYSTEM.USER.UPDATE,
-        delete:PERMISSIONS.SYSTEM.USER.DELETE,
-        view: PERMISSIONS.SYSTEM.USER.VIEW,
+        value:"USER",
+        parentValue:"SYSTEM",
     },
     {
         id:6,
         name:"Role",
         isParent:false,
-        create:PERMISSIONS.SYSTEM.ROLE.CREATE,
-        update:PERMISSIONS.SYSTEM.ROLE.UPDATE,
-        delete:PERMISSIONS.SYSTEM.ROLE.DELETE,
-        view: PERMISSIONS.SYSTEM.ROLE.VIEW,
+        value:"ROLE",
+        parentValue:"SYSTEM",
     },
     {
         id:7,
         name:"orders_management",
-        isParent:true
+        isParent:true,
+        value:"MANAGE_ORDER"
     },
     {
         id:8,
         name:"reviews",
         isParent:false,
-        create:PERMISSIONS.MANAGE_ORDER.REVIEW.CREATE,
-        update:PERMISSIONS.MANAGE_ORDER.REVIEW.UPDATE,
-        delete:PERMISSIONS.MANAGE_ORDER.REVIEW.DELETE,
-        view: PERMISSIONS.MANAGE_ORDER.REVIEW.VIEW,
+        value:"REVIEW",
+        parentValue:"MANAGE_ORDER",
         isHideView:true,
         isHideCreate:true
     },
@@ -132,41 +134,38 @@ export const LIST_DATA_PERMISSIONS:any = [
         id:9,
         name:"orders",
         isParent:false,
-        create:PERMISSIONS.MANAGE_ORDER.ORDER.CREATE,
-        update:PERMISSIONS.MANAGE_ORDER.ORDER.UPDATE,
-        delete:PERMISSIONS.MANAGE_ORDER.ORDER.DELETE,
-        view: PERMISSIONS.MANAGE_ORDER.ORDER.VIEW,
+        value:"ORDER",
+        parentValue:"MANAGE_ORDER",
+        
     },
     {
         id:10,
         name:"settings",
-        isParent:true
+        isParent:true,
+        value:"SETTING"
     },
     {
         id:11,
         name:"delivery_type",
         isParent:false,
-        create:PERMISSIONS.SETTING.DELIVERY_TYPE.CREATE,
-        update:PERMISSIONS.SETTING.DELIVERY_TYPE.UPDATE,
-        delete:PERMISSIONS.SETTING.DELIVERY_TYPE.DELETE,
-        isHideView:true
+        isHideView:true,
+        value:"DELIVERY_TYPE",
+        parentValue:"SETTING"
     },
     {
         id:12,
         name:"payment_type",
         isParent:false,
-        create:PERMISSIONS.SETTING.PAYMENT_TYPE.CREATE,
-        update:PERMISSIONS.SETTING.PAYMENT_TYPE.UPDATE,
-        delete:PERMISSIONS.SETTING.PAYMENT_TYPE.DELETE,
+        value:"PAYMENT_TYPE",
+        parentValue:"SETTING",
         isHideView:true
     },
     {
         id:13,
         name:"City",
         isParent:false,
-        create:PERMISSIONS.SETTING.CITY.CREATE,
-        update:PERMISSIONS.SETTING.CITY.UPDATE,
-        delete:PERMISSIONS.SETTING.CITY.DELETE,
+        value:"CITY",
+        parentValue:"SETTING",
         isHideView:true
     },
 ]
